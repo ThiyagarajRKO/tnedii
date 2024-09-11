@@ -1,0 +1,17 @@
+@import 'variables/variables';
+@import 'mixins/mixins';
+@import 'components/components';
+@import 'layouts/layouts';
+@import 'integrate';
+
+.rv-media-list .rv-media-list-title .rv-media-file-name{
+    max-width: 400px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;   
+}
+.rv-media-list .rv-media-list-title .rv-media-file-name:hover{
+    overflow: visible;
+    word-wrap: break-word;
+    white-space: initial;   
+}

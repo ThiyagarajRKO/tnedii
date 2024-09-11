@@ -1,0 +1,15 @@
+{
+    "name": "Emircom",
+    "namespace": "Theme\\Tvet\\",
+    "description": "Emircom is default theme since v5.16",
+    "author": "Impiger Technologies",
+    "version": "5.16",
+    "required_plugins": [
+        "blog",
+        "contact",
+        "gallery",
+        "language",
+        "block",
+        "member"
+    ]
+}

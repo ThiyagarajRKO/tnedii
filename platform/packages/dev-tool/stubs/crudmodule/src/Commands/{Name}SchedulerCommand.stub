@@ -1,0 +1,57 @@
+<?php
+
+namespace Impiger\{Module}\Commands;
+
+use Impiger\{Module}\Repositories\Interfaces\{Name}Interface;
+use Illuminate\Console\Command;
+use Throwable;
+use EmailHandler;
+use BaseHelper;
+
+class {Name}SchedulerCommand extends Command
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'cms:{name}:scheduler';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Schedule Jobs';
+
+    /**
+     * @var AuditLogInterface
+     */
+    protected ${name}Repository;
+
+    /**
+     * RebuildPermissions constructor.
+     *
+     * @param {name}Interface ${name}Repository
+     */
+public function __construct({Name}Interface ${name}Repository)
+    {
+        parent::__construct();
+        $this->{name}Repository = ${name}Repository;
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @throws Throwable
+     */
+    public function handle()
+    {
+        $this->info('Processing...');
+        #{scheduler}
+        $this->info('Done!');
+    }
+    
+   
+
+}

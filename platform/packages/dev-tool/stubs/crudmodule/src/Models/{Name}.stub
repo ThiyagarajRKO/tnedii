@@ -1,0 +1,45 @@
+<?php
+
+namespace Impiger\{Module}\Models;
+
+use Impiger\Base\Traits\EnumCastable;
+use Impiger\Base\Enums\BaseStatusEnum;
+use Impiger\Base\Models\BaseModel;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use DB;
+{revision_trait_path}
+{workflow_trait_path}
+
+class {Name} extends BaseModel
+{
+    use EnumCastable;
+    use SoftDeletes;
+    {revision_trait}
+    {workflow_trait}
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = '{names}';
+    
+    {revision_properties}
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        {fillable_fields}
+    ];
+
+    /**
+     * @var array
+     */
+    protected $casts = [
+        {casting_fields}
+    ];
+
+    {subform_relationship_fns}
+    
+    #{belongsToFn}
+    {join_fields}
+}

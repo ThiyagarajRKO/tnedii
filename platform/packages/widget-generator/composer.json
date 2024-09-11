@@ -1,0 +1,21 @@
+{
+    "name": "impiger/widget-generator",
+    "description": "Widget generator",
+    "type": "package",
+    "autoload": {
+        "psr-4": {
+            "Impiger\\WidgetGenerator\\": "src"
+        }
+    },
+    "require": {
+        "impiger/platform": "*@dev",
+        "impiger/widget": "*@dev"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Impiger\\WidgetGenerator\\Providers\\WidgetGeneratorServiceProvider"
+            ]
+        }
+    }
+}

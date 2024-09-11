@@ -1,0 +1,9 @@
+{
+  "name": "Simple Slider",
+  "namespace": "Impiger\\SimpleSlider\\",
+  "provider": "Impiger\\SimpleSlider\\Providers\\SimpleSliderServiceProvider",
+  "author": "Impiger Technologies",
+  "url": "https://impigertech.com",
+  "version": "5.8",
+  "description": "A plugin to create sliders"
+}

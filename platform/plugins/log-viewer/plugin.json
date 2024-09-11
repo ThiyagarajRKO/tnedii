@@ -1,0 +1,9 @@
+{
+    "name": "Log Viewer",
+    "namespace": "Impiger\\LogViewer\\",
+    "provider": "Impiger\\LogViewer\\Providers\\LogViewerServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "https://impigertech.com",
+    "version": "5.3",
+    "description": "Provides a log viewer for Impiger CMS"
+}

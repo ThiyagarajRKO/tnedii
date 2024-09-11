@@ -1,0 +1,20 @@
+{
+  "name": "impiger/{-name}",
+  "description": "{Name} package for Impiger CMS application",
+  "type": "package",
+  "autoload": {
+    "psr-4": {
+      "Impiger\\{Name}\\": "src"
+    }
+  },
+  "require": {
+
+  },
+  "extra":{
+    "laravel":{
+      "providers":[
+        "Impiger\\{Name}\\Providers\\{Name}ServiceProvider"
+      ]
+    }
+  }
+}

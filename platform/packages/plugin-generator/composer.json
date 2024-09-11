@@ -1,0 +1,21 @@
+{
+    "name": "impiger/plugin-generator",
+    "description": "Plugin generator",
+    "type": "package",
+    "autoload": {
+        "psr-4": {
+            "Impiger\\PluginGenerator\\": "src"
+        }
+    },
+    "require": {
+        "impiger/platform": "*@dev",
+        "impiger/plugin-management": "*@dev"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Impiger\\PluginGenerator\\Providers\\PluginGeneratorServiceProvider"
+            ]
+        }
+    }
+}

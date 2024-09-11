@@ -1,0 +1,138 @@
+/* 
+    Created on : 15 Apr, 2021, 3:49:35 PM
+    Author     : sabarishankar
+*/
+.draggable-main{
+        margin:10px 10px 0 10px;
+    }   
+    .moduleListBox {
+        border: 1px solid #ccc;
+        border-radius: 2px;
+        height: 300px;
+        overflow-y: auto;
+        /* overflow-x: hidden; */
+    }
+    .moduleListBox:last-child{
+        margin: 0px;
+    }
+    .connected-sortable {
+        list-style: none;
+        padding: 1px;
+        margin: 0px;
+    }
+
+   ul.moduleListBox li.listItems:hover {
+        cursor: pointer;
+        background-color: #eff1f5;
+        color: #000;
+    }
+   ul.moduleListBox li .control-label:hover {
+        cursor: pointer;
+        background-color: #eff1f5;
+        color: #000;
+    }
+   ul.moduleListBox li.daredevel-tree .label:hover {
+        cursor: pointer;
+    }
+    
+    .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+        color:#454545!important;
+    }
+
+    .ui-state-active .ui-icon, .ui-button:active .ui-icon {
+        background-image: url(../../base/libraries/jquery-ui/images/ui-icons_444444_256x240.png);
+    }
+
+    .meta-boxes .widget-title{
+        height: 40px!important;
+        padding: 1px 5px!important;
+    }
+
+    .pl-10{
+        padding-left: 10px!important;
+    }
+
+    li.ui-sortable-helper {
+        color: red;
+        overflow: inherit!important;
+    }
+
+    .width-45 {
+        width:41.6666666667%;
+    }
+    .width-10 {
+        width:10%;
+    }
+
+    .moduleListBox li.selected {
+        color: #000;
+        text-decoration: none;
+        background-color: #ebedf2;
+    }
+    
+    .btn-block+.btn-block {
+        margin-top: 5px;
+    }
+    .btn-block {
+        display: block;
+        width: 100%;
+    }
+
+    .btn-default {
+        color: #333;
+        background-color: #fff;
+        border-color: #ccc;
+    }
+
+    .listboxToolBarBtns {
+        margin-top: 10%;
+        padding: 0 10px;
+    }
+
+    .form-actions .btn-set{
+        margin-top: 15px;
+    }
+
+    #auto-checkboxes ul > li,#dls-auto-checkboxes ul > li {
+        margin-left: 37px;
+        padding-left: 18px;
+        border-left: 0px!important;
+    }
+
+    .list-feature .ui-widget-content {
+        border: none;
+        background: none;
+        margin-top: 2px;
+    }
+    
+    #auto-checkboxes ul > li:hover #dls-auto-checkboxes ul > li:hover{
+        cursor: pointer;
+        background-color: #eff1f5;
+        color: #000;
+    }
+    .daredevel-tree li span.daredevel-tree-anchor {
+        cursor: default;
+        position: relative;
+        margin-top: -9px!important;
+    }
+    
+    
+
+.ml-1rem {
+    margin-left: 1rem;
+}
+
+.dashboard-Lborder {
+    border-left: 1px solid #0000000F;
+}
+.mr-1rem {
+    margin-right: 0.8rem;
+}
+.mr-2rem
+    {
+        margin-left: 1.5rem;
+    }
+    
+#auto-checkboxes ul > li.leaf,#dls-auto-checkboxes ul > li.leaf{
+        margin-left: 15px;
+    }

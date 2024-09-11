@@ -1,0 +1,9 @@
+{
+    "name": "SpokeRegistration",
+    "namespace": "Impiger\\SpokeRegistration\\",
+    "provider": "Impiger\\SpokeRegistration\\Providers\\SpokeRegistrationServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "N/A",
+    "version": "1.0",
+    "description": "The description for module spoke_registration"
+}

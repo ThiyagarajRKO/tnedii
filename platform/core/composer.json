@@ -1,0 +1,79 @@
+{
+    "name": "impiger/platform",
+    "description": "The Impiger Platform based on Laravel Framework.",
+    "keywords": [
+        "impiger",
+        "impiger cms",
+        "impiger platform"
+    ],
+    "homepage": "https://impigertech.com",
+    "support": {
+        "issues": "https://impiger.ticksy.com",
+        "document": "https://docs.impigertech.com"
+    },
+    "authors": [
+        {
+            "name": "Impiger Technologies",
+            "email": "contact@impigertech.com"
+        }
+    ],
+    "type": "project",
+    "require": {
+        "barryvdh/laravel-dompdf": "^0.9.0",
+        "impiger/assets": "*@dev",
+        "intervention/image": "^2.4",
+        "kris/laravel-form-builder": "1.16.x-dev",
+        "laravelcollective/html": "^6.1",
+        "xantios/mimey": "^2.1",
+        "tightenco/ziggy": "^1.0",
+        "yajra/laravel-datatables-buttons": "^4.9",
+        "yajra/laravel-datatables-oracle": "^9.9",
+        "guzzlehttp/guzzle": "^6.0|^7.0",
+        "mews/purifier": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Impiger\\Support\\": "support/src",
+            "Impiger\\ACL\\": "acl/src",
+            "Impiger\\Base\\": "base/src",
+            "Impiger\\Dashboard\\": "dashboard/src",
+            "Impiger\\Media\\": "media/src",
+            "Impiger\\Setting\\": "setting/src",
+            "Impiger\\Table\\": "table/src",
+            "Impiger\\JsValidation\\": "js-validation/src",
+            "Impiger\\Chart\\": "chart/src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Impiger\\Base\\Providers\\BaseServiceProvider",
+                "Impiger\\Base\\Providers\\CommandServiceProvider",
+                "Impiger\\Base\\Providers\\EventServiceProvider",
+                "Impiger\\Base\\Providers\\BreadcrumbsServiceProvider",
+                "Impiger\\Base\\Providers\\ComposerServiceProvider",
+                "Impiger\\Base\\Providers\\MailConfigServiceProvider",
+                "Impiger\\Base\\Providers\\FormServiceProvider",
+                "Impiger\\Support\\Providers\\SupportServiceProvider",
+                "Impiger\\Table\\Providers\\TableServiceProvider",
+                "Impiger\\ACL\\Providers\\AclServiceProvider",
+                "Impiger\\Dashboard\\Providers\\DashboardServiceProvider",
+                "Impiger\\Media\\Providers\\MediaServiceProvider",
+                "Impiger\\JsValidation\\Providers\\JsValidationServiceProvider",
+                "Impiger\\Chart\\Providers\\ChartServiceProvider"
+            ],
+            "aliases": {
+                "Assets": "Impiger\\Base\\Facades\\AssetsFacade",
+                "BaseHelper": "Impiger\\Base\\Facades\\BaseHelperFacade",
+                "MetaBox": "Impiger\\Base\\Facades\\MetaBoxFacade",
+                "Action": "Impiger\\Base\\Facades\\ActionFacade",
+                "Filter": "Impiger\\Base\\Facades\\FilterFacade",
+                "EmailHandler": "Impiger\\Base\\Facades\\EmailHandlerFacade",
+                "Breadcrumbs": "Impiger\\Base\\Facades\\BreadcrumbsFacade",
+                "JsValidator": "Impiger\\JsValidation\\Facades\\JsValidatorFacade"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

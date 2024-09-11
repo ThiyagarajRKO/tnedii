@@ -1,0 +1,9 @@
+{
+    "name": "PasswordCriteria",
+    "namespace": "Impiger\\PasswordCriteria\\",
+    "provider": "Impiger\\PasswordCriteria\\Providers\\PasswordCriteriaServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "https://impigertech.com",
+    "version": "1.0",
+    "description": "Give Criteria for password"
+}

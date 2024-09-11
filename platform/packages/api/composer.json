@@ -1,0 +1,23 @@
+{
+    "name": "impiger/api",
+    "description": "API package for Impiger CMS application",
+    "type": "package",
+    "autoload": {
+        "psr-4": {
+            "Impiger\\Api\\": "src"
+        }
+    },
+    "require": {
+        "impiger/platform": "*@dev",
+        "laravel/passport": "^9.0|^10.0",
+        "knuckleswtf/scribe": "^2.0",
+        "fruitcake/laravel-cors": "^2.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Impiger\\Api\\Providers\\ApiServiceProvider"
+            ]
+        }
+    }
+}

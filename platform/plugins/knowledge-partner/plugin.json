@@ -1,0 +1,9 @@
+{
+    "name": "Knowledge Partner",
+    "namespace": "Impiger\\KnowledgePartner\\",
+    "provider": "Impiger\\KnowledgePartner\\Providers\\KnowledgePartnerServiceProvider",
+    "author": "",
+    "url": "",
+    "version": "1",
+    "description": "Knowledge Partner"
+}

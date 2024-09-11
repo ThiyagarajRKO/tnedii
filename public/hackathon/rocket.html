@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>AIM</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Place favicon.ico in the root directory -->
+  <link rel="icon" type="image/png" sizes="16x16" href="images/it_company/ATL_Headerlogo.png">
+  <meta name="description" content="AIM" />
+  <meta name="keywords" content="AIM" />
+  <meta name="author" content="" />
+  <meta name="MobileOptimized" content="320" />
+  <script
+    src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+  <style>
+    @keyframes flicker {
+      0% {
+        transform: rotate(-1deg);
+      }
+
+      20% {
+        transform: rotate(3deg) scaleY(1.05);
+      }
+
+      60% {
+        transform: rotate(1deg);
+      }
+
+      80% {
+        transform: rotate(-1deg) scaleY(0.9);
+      }
+
+      100% {
+        transform: rotate(4deg);
+      }
+    }
+
+    body {
+      margin: 0;
+      background-color: #143754;
+      background-image: url("images/backgrouond.png");
+      background-repeat: no-repeat, repeat;
+      min-height: 640px;
+      background-size: cover;
+    }
+
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      text-align: center;
+      transform: translate(-50%, -50%);
+    }
+
+    .rocket {
+      width: 230px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .btn {
+      background: #007ff4;
+      box-shadow: 0px 4px 12px rgba(43, 54, 65, 0.1);
+      display: block;
+      margin: auto;
+      border: none;
+      color: white;
+      font-family: Roboto;
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 250ms ease;
+      padding: 10px 24px;
+    }
+
+    .btn:hover {
+      background: #2c97fa;
+    }
+
+    .btn:active {
+      background: #1374ce;
+      transform: scale(0.98);
+    }
+
+    .rocket-wrapper {
+      position: relative;
+      transition: 4s ease;
+      pointer-events: none;
+    }
+
+    .rocket-launched {
+      transform: translateY(-900px);
+    }
+
+    .rocket-launched .flame-wrapper {
+      opacity: 1 !important;
+    }
+
+    .rocket-wrapper .flame-wrapper {
+      position: absolute;
+      width: max-content;
+      height: max-content;
+      left: 50%;
+      transform: scaleY(-1) translateX(-40px);
+      bottom: 46px;
+      opacity: 0;
+      transition: 250ms ease;
+    }
+
+    .flame {
+      bottom: 0;
+      position: absolute;
+      border-radius: 50% 0% 50% 50%;
+      transform: rotate(-45deg);
+    }
+
+    .red {
+      width: 80px;
+      height: 80px;
+      background: #C52C28;
+      box-shadow: 0px 0px 10px 5px #C52C28;
+    }
+
+    .orange {
+      left: 10px;
+      width: 60px;
+      height: 60px;
+      background: orange;
+      box-shadow: 0px 0px 12px 6px orange;
+    }
+
+    .gold {
+      left: 18px;
+      width: 45px;
+      height: 45px;
+      background: gold;
+      box-shadow: 0px 0px 9px 4px gold;
+    }
+
+    .white {
+      left: 22px;
+      width: 35px;
+      height: 35px;
+      background: lightyellow;
+      box-shadow: 0px 0px 9px 4px lightyellow;
+    }
+
+    .flame-anim {
+      position: relative;
+      animation: flicker 3ms ease-in infinite;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .animateHide {
+      visibility: hidden;
+    }
+
+    .animate {
+      visibility: visible;
+      -webkit-transition: 2s;
+      transition: 2s;
+      opacity: 1;
+    }
+
+    .animation {
+      -webkit-transition: 1s;
+      -moz-transition: 1s;
+      -o-transition: 1s;
+      transition: 1s;
+      opacity: 0;
+    }
+
+    #timer-beep {
+      position: absolute;
+      top: -100000em;
+    }
+  </style>
+
+</head>
+
+<body translate="no">
+  <div class="container">
+    <div class="AIM_titles">
+      <img src="images/logos.png" class="" id="logos" alt="Logo" style="width: 100%;" />
+      <img src="images/title.gif" class="" id="titleGif" alt="Rocket" style="width: 20%; margin-top: 10px;" />
+
+      <div class="row begin-countdown" id="begin-countdown">
+        <div class="col-md-12 text-center">
+          <div class="dot" style="position: center">
+            <h3 id="pageBeginCountdownText" class="clock">10</h3>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div id="rocket" class="rocket-wrapper">
+      <!-- <img class="rocket" src="https://ig.solcode.net/src/rocket.svg" alt="rocket"> -->
+      <img class="rocket" src="images/rocket.png" alt="rocket">
+
+
+      <div class="flame-wrapper">
+        <div class="flame-anim">
+          <div class="flame red"></div>
+          <div class="flame orange"></div>
+          <div class="flame gold"></div>
+          <div class="flame white"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div id="countdown"></div> -->
+    <audio id="timer-beep" src="images/Countdown.mp3"></audio>
+    
+    <button onclick="launchRocket()" class="btn" id="launch_btn">Launch</button>
+    <!-- <audio id="audio" src="images/rocket1.mp3"></audio> -->
+
+    <style>
+      .dot {
+        height: 100px;
+        width: 100px;
+        border-style: solid;
+        border-width: 2px;
+        border-radius: 50%;
+        display: inline-block;
+        text-align: center;
+      }
+
+      .clock {
+        text-align: center;
+        font-size: 30px;
+      }
+
+      .pp {
+        text-align: center;
+      }
+    </style>
+
+  </div>
+
+  <script id="rendered-js">
+
+    document.getElementById("begin-countdown").style.display = "none";
+
+    function ProgressCountdown(timeleft, text) {
+      return new Promise((resolve, reject) => {
+        var countdownTimer = setInterval(() => {
+          timeleft--;
+
+          document.getElementById(text).textContent = timeleft;
+
+
+          if (timeleft < 0) {
+            clearInterval(countdownTimer);
+            resolve(true);
+            document.getElementById("begin-countdown").style.display = "none";
+            document.getElementById("rocket").classList.add("rocket-launched");
+            var audio = document.getElementById("audio");
+            audio.play();
+            // var interval = setInterval(myURL, 12000);
+          }
+        }, 1000);
+      });
+    }
+
+    function launchRocket() {
+      document.getElementById("launch_btn").disabled = true;
+      document.getElementById("begin-countdown").style.display = "block";
+      document.getElementById("timer-beep").play();
+      ProgressCountdown(10, "pageBeginCountdownText");
+
+      // document.getElementById("rocket").classList.add("rocket-launched");
+      // document.getElementById('logos').className = 'animation';
+      // document.getElementById("logos").classList.add("animate");
+      // document.getElementById("titleGif").classList.add("animate");
+      // document.getElementById("logos").style.visibility = 'visible';
+
+      // document.getElementById("titleGif").style.visibility = 'visible';
+      // var audio = document.getElementById("audio");
+      // audio.play();
+      var interval = setInterval(myURL, 14000);
+    }
+    function myURL() {
+      document.location.href = './index.html';
+      clearInterval(interval);
+    }
+    //# sourceURL=pen.js
+
+  </script>
+
+
+</body>
+
+</html>

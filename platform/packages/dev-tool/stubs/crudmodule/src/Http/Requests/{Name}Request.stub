@@ -1,0 +1,40 @@
+<?php
+
+namespace Impiger\{Module}\Http\Requests;
+
+use Impiger\Base\Enums\BaseStatusEnum;
+use Impiger\Support\Http\Requests\Request;
+use Illuminate\Validation\Rule;
+
+class {Name}Request extends Request
+{
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {   
+        ${+name} = new \Impiger\{Module}\Models\{Name};
+		${+name} = ($this->{+name}) ? ${+name}::find($this->{+name}) : $this;
+        $validationRules = [
+            {crud_mandatory_field}
+            {subform_validation_script}
+        ];
+        
+        {captcha_required}
+        return $validationRules;
+    }
+
+    /**
+     * Get the validation message that apply to the request.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [{crud_validation_msg}
+            {subform_validation_msg}];
+    }
+}

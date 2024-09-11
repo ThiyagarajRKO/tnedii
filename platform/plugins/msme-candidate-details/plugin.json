@@ -1,0 +1,9 @@
+{
+    "name": "MsmeCandidateDetails",
+    "namespace": "Impiger\\MsmeCandidateDetails\\",
+    "provider": "Impiger\\MsmeCandidateDetails\\Providers\\MsmeCandidateDetailsServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "N/A",
+    "version": "1.0",
+    "description": "The description for module msme_candidate_details"
+}

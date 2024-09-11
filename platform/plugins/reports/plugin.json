@@ -1,0 +1,9 @@
+{
+    "name": "Reports",
+    "namespace": "Impiger\\Reports\\",
+    "provider": "Impiger\\Reports\\Providers\\ReportsServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "N/A",
+    "version": "1.0",
+    "description": "The description for module reports"
+}

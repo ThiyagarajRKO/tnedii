@@ -1,0 +1,8 @@
+{
+    "name": "impiger/simple-slider",
+    "description": "Simple slider plugin",
+    "type": "package",
+    "require": {
+        "doctrine/dbal": "^3.0"
+    }
+}

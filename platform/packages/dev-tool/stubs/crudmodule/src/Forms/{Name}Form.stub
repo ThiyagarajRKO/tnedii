@@ -1,0 +1,61 @@
+<?php
+
+namespace Impiger\{Module}\Forms;
+
+use Impiger\Base\Forms\FormAbstract;
+use Impiger\Base\Enums\BaseStatusEnum;
+use Impiger\{Module}\Http\Requests\{Name}Request;
+use Impiger\{Module}\Models\{Name};
+use DB;
+use App\Utils\CrudHelper;
+{workflow_trait_path}
+
+class {Name}Form extends FormAbstract
+{
+    
+    {workflow_trait}
+    /**
+     * {@inheritDoc}
+     */
+    public function buildForm()
+    {
+        $pathInfo = $this->request->getPathInfo();
+        if((isset($this->formOptions['isView']) && $this->formOptions['isView']) || str_contains($pathInfo, 'viewdetail')) {
+            return $this->viewForm();
+        }
+        {viewgallery_form_declr}
+
+        $this
+            {build_form_template}
+            ->setupModel(new {Name})
+            ->setValidatorClass({Name}Request::class)
+            ->withCustomFields()
+            {crud_form}
+            ->setActionButtons(view('module.form-actions')->render());
+            {entity_method}
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function viewForm()
+    {
+
+		$this->model = (\Arr::get($this->model, '{namePlural}')  && !\Arr::has($this->model, '{namePlural}.0')) ?(object) $this->model['{namePlural}'] : $this->model;
+
+        if(!isset($this->model->id)) {
+            $this->model = {Name}::getModel();
+        }
+        
+        {workflow_support}
+        $this
+            {form_display_template}
+            ->setupModel(new {Name})
+            ->setTitle(page_title()->getTitle())
+            ->setValidatorClass({Name}Request::class)
+            ->withCustomFields()
+			->setFormOption('class','viewForm')
+            {view_crud_form};
+    }
+    {viewgallery_form_method}
+}

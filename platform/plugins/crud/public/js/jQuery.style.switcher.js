@@ -1,0 +1,1 @@
+$(document).ready((function(){var e=$.cookie("sximo6-theme");void 0!==e&&$("#theme").attr({href:e}),$("#themecolors").on("click","a",(function(){var e=$(this).attr("data-url");$("#theme").attr({href:e}),$.cookie("sximo6-theme",e,{expires:365,path:"/"})}))}));

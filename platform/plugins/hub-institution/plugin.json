@@ -1,0 +1,9 @@
+{
+    "name": "HubInstitution",
+    "namespace": "Impiger\\HubInstitution\\",
+    "provider": "Impiger\\HubInstitution\\Providers\\HubInstitutionServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "N/A",
+    "version": "1.0",
+    "description": "The description for module hub_institution"
+}

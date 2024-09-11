@@ -1,0 +1,13 @@
+<?php
+
+return [
+    'name'   => '{++Titles}',
+    'create' => 'New {++title}',
+    'edit'   => 'Edit {++title}',
+    'delete'   => 'Delete {++title}',
+    'export'   => 'Export {++title}',
+    'print'   => 'Print {++title}',
+    'enable'   => 'Enable {++title}',
+    'disable'   => 'Disable {++title}',
+    'view'      => 'View {++title}',
+];

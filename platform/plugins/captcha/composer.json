@@ -1,0 +1,8 @@
+{
+    "name": "impiger/captcha",
+    "description": "Captcha for higher security",
+    "homepage": "https://impigertech.com",
+    "require": {
+        "google/recaptcha": "^1.2"
+    }
+}

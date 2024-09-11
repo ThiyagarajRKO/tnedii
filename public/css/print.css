@@ -1,0 +1,221 @@
+html {
+    margin-top: 10px !important;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    margin-bottom: -3px !important;
+}
+body {
+    color: black;
+    display: table;
+    font-family: Georgia, serif;
+    font-size: 24px;
+    text-align: center;
+    border: 5px double black;
+}
+
+ .container {
+    width: 100%;
+    vertical-align: middle;
+    /* background-color:#ffffff; */
+}
+
+.header {
+    display: flex;
+    padding: 5px;
+    color: #b31807;
+    
+}
+
+/* .header .logo {
+    width: 12.5%;
+} */
+
+.header-container {
+    /* margin: 25px 0 0 0 !important;
+    padding: 15px 0 0 0 !important; */
+} 
+
+.header-container > .main-header {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.header-container > .sub-header {
+    font-size: 18px;
+}
+
+.header-container > .sub1 {
+    color: black;
+}
+
+.marquee {
+    font-style: italic;
+    font-size: 28px !important;
+    font-weight: bold;
+    /* margin-top: 15px; */
+}
+.assignment {
+    margin-top: 10px;
+}
+.person h3 {
+    font-size: 38px;
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+.completion i {
+    font-size: 28px;
+}
+
+.under {
+    font-size: 28px;
+} 
+
+.care_of b {
+    font-size: 26px;
+} 
+.district b {
+    font-size: 26px;
+} 
+
+.program h3 {
+    font-size: 32px;
+}
+
+.dept_text h2 {
+    font-size: 30px !important;
+}
+
+.division h3 {
+    font-size: 28px;
+}
+
+.program h3, .marquee, .dept_text h2 {
+    font-weight: bold;    
+}
+
+.program h3, .marquee, .dept_text h2{
+    font-style: italic;
+}
+
+marquee, .assignment, .program, .care_of, .district, .sponser, .division {
+    margin-bottom: 10px;
+}
+/* section {                
+    background:url('/storage/editn_logo.png');
+    background-repeat:no-repeat;
+    background-position:center;
+    filter:alpha(opacity=60);
+}
+.wrapper {
+    opacity:0.9;
+    filter:alpha(opacity=90);
+} */
+footer {
+    font-size: 12px !important;
+    position: fixed;
+    bottom: 0.5cm; 
+    left: 0.5cm; 
+    right: 0cm;
+    height: 1.5cm;
+}
+
+.wrapper:before {
+    content: "";
+    background: url(../storage/edii-logo-white.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 9999;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    opacity: 0.2;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%,-50%);
+    -ms-transform: translate(50%,-50%);
+    -webkit-transform: translate(50%,-50%);
+}
+
+.wrapper {
+    background-color:#ffffff;
+    opacity: 0.9;
+    filter: alpha(opacity=90);
+    position: relative;
+}
+
+section.main-section {
+    position: relative;
+    padding: 60px;
+}
+
+section.main-section:before {
+    background-image: url('../storage/bg-border.png');
+    background-repeat: no-repeat;
+    content: "";
+    width:1092.5px;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    height:768px;
+    background-position: top;
+    background-size: 100% 100%;
+    left: 0;
+    object-fit: cover;
+}
+
+.profile {
+    position: absolute;
+    width: 175px;
+    height: 200px;
+    top: 12.5%;
+    left: 81%;
+    /* border: 1px solid #b31807; */
+    text-align: center;
+    padding: 5px !important;
+    display: block;
+}
+
+
+.profile-img {
+    text-align: center !important;
+    /* border: 1px solid #345444; */
+    padding: 5px;
+    display: inline-block;
+    position: relative;
+}
+.profile h5 {
+    font-size: 16px;
+    font-weight: bold; 
+}
+
+.profile img {
+    width: 100%;
+    height: 155px;
+    text-align: center;
+    /* border: 1px solid #b31807; */
+    display: block;
+}
+
+.row {
+    display: flex;
+}
+
+.col-md-6 {
+    border: 1px solid #b31807;
+}
+.grid-col-50-percentage {
+    display: flex;    
+}
+
+.division-department {
+    position: absolute;
+    top: 85%;
+    /* left: 75%; */
+}
+
+.division-department div h3 {
+    /* font-size: 18px; */
+    font-weight: lighter;
+}
+

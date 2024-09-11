@@ -1,0 +1,9 @@
+{
+    "name": "InnovationVoucherProgram",
+    "namespace": "Impiger\\InnovationVoucherProgram\\",
+    "provider": "Impiger\\InnovationVoucherProgram\\Providers\\InnovationVoucherProgramServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "N/A",
+    "version": "1.0",
+    "description": "The description for module innovation_voucher_program"
+}

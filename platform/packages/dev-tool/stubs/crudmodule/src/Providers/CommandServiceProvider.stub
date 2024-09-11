@@ -1,0 +1,20 @@
+<?php
+
+namespace Impiger\{Module}\Providers;
+
+
+use Illuminate\Support\ServiceProvider;
+
+class CommandServiceProvider extends ServiceProvider
+{
+    public function boot()
+    {
+        if ($this->app->runningInConsole()) {
+            $commands = #{scheduler_command_class} 
+            if(!empty($commands)){
+                $this->commands([implode(",::class",$commands)]);
+            }        
+            
+        }
+    }
+}

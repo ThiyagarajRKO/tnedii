@@ -1,0 +1,9 @@
+{
+    "name": "Contact Form",
+    "namespace": "Impiger\\Contact\\",
+    "provider": "Impiger\\Contact\\Providers\\ContactServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "https://impigertech.com",
+    "version": "5.8",
+    "description": "Contact Form"
+}

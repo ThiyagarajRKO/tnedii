@@ -1,0 +1,10 @@
+<?php
+
+namespace Impiger\{Module}\Repositories\Eloquent;
+
+use Impiger\Support\Repositories\Eloquent\RepositoriesAbstract;
+use Impiger\{Module}\Repositories\Interfaces\{Name}Interface;
+
+class {Name}Repository extends RepositoriesAbstract implements {Name}Interface
+{
+}

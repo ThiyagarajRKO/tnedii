@@ -1,0 +1,15 @@
+{
+    "name": "Ripple",
+    "namespace": "Theme\\Ripple\\",
+    "description": "Ripple is default theme for Impiger since v2.0",
+    "author": "Impiger Technologies",
+    "version": "5.16",
+    "required_plugins": [
+        "blog",
+        "contact",
+        "gallery",
+        "language",
+        "block",
+        "member"
+    ]
+}

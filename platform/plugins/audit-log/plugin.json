@@ -1,0 +1,9 @@
+{
+    "name": "Audit Log",
+    "namespace": "Impiger\\AuditLog\\",
+    "provider": "Impiger\\AuditLog\\Providers\\AuditLogServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "https://impigertech.com",
+    "version": "5.8",
+    "description": "Record activities logs"
+}

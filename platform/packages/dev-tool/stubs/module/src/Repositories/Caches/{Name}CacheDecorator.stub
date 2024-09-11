@@ -1,0 +1,11 @@
+<?php
+
+namespace Impiger\{Module}\Repositories\Caches;
+
+use Impiger\Support\Repositories\Caches\CacheAbstractDecorator;
+use Impiger\{Module}\Repositories\Interfaces\{Name}Interface;
+
+class {Name}CacheDecorator extends CacheAbstractDecorator implements {Name}Interface
+{
+
+}

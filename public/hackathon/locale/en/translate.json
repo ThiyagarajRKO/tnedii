@@ -1,0 +1,193 @@
+[
+  {
+    "menu": {
+      "home": "About EDII-TN",
+      "roadmap": "About EDII's Hackathon",
+      "testimonial": "About UNICEF",
+      "theme": "FAQ's",
+      "faq": "Contacts",
+      "login": "Login",
+      "home1": "Home"
+    }
+  },
+  {
+    "heroSection": {
+      "title": "Entrepreneurship Development and Innovation Institute (EDII-TN)",
+      "title1": "Creating Change Makers Of Tomorrow With 21st",
+      "skill": "Century Skills",
+      "desc": "Nurture a culture of social innovation and build skills while inspiring young people to become transformative leaders.",
+      "signup": "Login",
+      "register": "Register"
+    }
+  },
+  {
+    "aboutSection": {
+      "title": "About EDII-TN",
+      "title1": "EDII-TN",
+      "desc": "The Entrepreneurship Development and Innovation Institute (EDII) in Tamil Nadu (TN) is a State owned pioneering institution fostering an ecosystem of entrepreneurship and innovation within the state. Dedicated to nurturing entrepreneurial talent and promoting a culture of innovation, EDII TN plays a pivotal role in driving economic growth and job creation. Headed by the Director of the Institute who is a senior IAS officer, EDII is managed under the superintendence of a Governing Council, appointed by the Government of Tamil Nadu.",
+      "desc1": "Founded in the year 2001 with the vision to empower aspiring entrepreneurs and transform innovative ideas into successful ventures, EDII TN offers various programmes, workshops, and support services.",
+      "desc2": "It acts as a catalyst by providing mentorship, guidance, and access to resources necessary for budding entrepreneurs to kickstart their ventures. The institute facilitates networking opportunities, connects entrepreneurs with investors, and assists in market access, thereby bridging crucial gaps in the entrepreneurial journey.",
+      "desc3": "EDII TN is not just focused on establishing businesses/startups, it also nurtures a spirit of innovation among the student community both in school and college, encouraging them to think creatively and develop solutions to real world problems. Through initiatives like hackathons, idea incubation programmes, and startup challenges, it fosters an environment conducive to innovation and problem solving. It amplifies the impact of its initiatives and contributes significantly to the economic development of Tamil Nadu.",
+      "desc4": "Key innovative activities of EDII-TN",
+      "desc5": "Following are the key activities of EDII-TN",
+      "desc6": "Entrepreneurship Development Programme (EDP) for people who are about to set up business ventures under various Government schemes.",
+      "desc7": "Identifying people with innovative ideas and providing them seed money to develop their ideas into product prototypes and then scale up the operation into the market. (Innovation Voucher Programme - Current funding Rs.20 crores). Young and old are thus enabled to innovate all over TamilNadu. New and innovative products are being developed and released to the market through this effort. A new breed of entrepreneurs is thus created with the help of this Government seed money. College students and freshers from colleges get easy access to seed money for innovation. EDII-TN has been creating very young entrepreneurs through this route. Thus, the startup ecosystem gets a fillip through the IVP.",
+      "desc8": "To inculcate the spirit of innovation & entrepreneurship among the school children and children doing higher studies, hackathon is conducted as an annual event, with highly attractive prize money. (currently Rs.52.50 lakhs) At a very young age, the children of TamilNadu are enabled to think higher, even much higher than their age, to provide innovative solutions to the local problems, using technology tools. School Innovation Development Project (SIDP) and Niral Thiruvizha, thus cover the entire spectrum of student community across TamilNadu.",
+      "desc9": "What is typically a domain of core engineering discipline people is offered to the students of all streams as standard through the hackathon. Thus a new breed of  student inventors/entrepreneurs is being generated through the EDII-TN’s efforts.hackathon is the best route to catapult a population into the next human development level. Thus EDII-TN has been attempting to create a “scientifically & socially oriented population” which is focused on human development and upliftment. The new generation of youth is expected to be significantly more advanced and society conscious than the rest of the nation.",
+      "desc10": "Currently EDII-TN covers over 6 lakh students every year through the twin hackathons. (Annual outlay Rs.6.5 crores). UINCEF is EDII’s technical partner for SIDP implementation.",
+      "desc11": "In short, EDII TN stands as a prominent body for aspiring entrepreneurs, providing them with the necessary tools, knowledge, and support to navigate the complex world of business and innovation. Its dedication to fostering a culture of entrepreneurship and innovation makes it a vital entity in the growth story of Tamil Nadu's economy."
+    }
+  },
+  {
+    "aboutSection1": {
+      "title": "About EDII’s Hackathon",
+      "title1": "EDII’s Hackathon",
+      "desc": "This is a Government’s novel initiative to make the higher education students of TamilNadu innovate. Originally it was run as “TamilNadu Student Innovators' (TNSI) project under Innovation and Entrepreneurship Development Programme (IEDP) by EDII-TN from 2016 onwards. From 2023-24, this project’s name was altered as EDII’s Hackathon.",
+      "desc1": "EDII’s Hackathon is open to all the branches of higher education in Tamil Nadu including Arts and Science students to equip them in the cycle of innovation & entrepreneurship. The creative talents of the students are thus brought out for their benefit and the society’s benefit at large.",
+      "desc2": "The expected outputs are:",
+      "desc3": "An aspirational, society conscious and innovative youth generation",
+      "desc4": "More new innovative products giving TECHNOLOGY DRIVEN solutions to the local problems.",
+      "desc5": "More trademarks, I.Ps ownership, startups in TamilNadu.",
+      "desc6": "More employment opportunities in TamilNadu & a more robust economy.",
+      "desc7": "The next move towards achieving a Trillion dollar economy by 2030-31.",
+      "desc8": "EDII’s Hackathon” - Purpose statement of the Government",
+      "desc9": "Niral Thiruvizha is to kindle the innovative mindset of  our students to address the persistent issues, real time problems with technology enabled solutions and pursue entrepreneurial goals”"
+    }
+  },
+  {
+    "roadmap": {
+      "title": "Road Map",
+      "title1": "Journey of a student in ATL Marathon",
+      "innovation": "INNOVATION",
+      "start": "QUICK START",
+      "winner": "WINNERS",
+      "sip": "SIP",
+      "sep": "SEP",
+      "registration": "Launch of ATL Marathon 2023 <br> Last day to submit projects for ATL Marathon",
+      "solving": "Innovation & Prototyping Phase",
+      "submission": "Announcement of Top 400 Teams",
+      "incubation": "Commencement of Student Internship Programme(SIP)",
+      "entrepreneurship": "Top teams from SIP participate in the student Entrepreneurship Programme(SEP)"
+    }
+  },
+  {
+    "impact": {
+      "title": "Engagement & Impact",
+      "desc": "INDIA"
+    }
+  },
+  {
+    "date": {
+      "title": "Important Dates",
+      "desc": "Launch of ATL Marathon",
+      "desc2": "SIP Programme starts",
+      "desc3": "SEP Programme starts",
+      "desc4": "Announcement of Top 350 teams",
+      "desc5": "Innovation & Prototyping Phase",
+      "desc6": "Last day to submit projects for ATL Marathon 23-24"
+    }
+  },
+  {
+    "prizes": {
+      "title": "Prizes & Certificates",
+      "desc": "Top 400 teams - Student Internship Programme (SIP)",
+      "desc1": "Top 75 teams - Student Entrepreneurship Programme (SEP)",
+      "title1": "Special Certificates -",
+      "desc2": "Top 10 teams from each state",
+      "desc3": "Top 10 teams from rural areas",
+      "desc4": "Top 10 teams from government schools",
+      "desc5": "Top 10 teams from Aspirational Districts",
+      "desc6": "Top 10 teams including Children with special needs"
+    }
+  },
+  {
+    "aboutSection2": {
+      "title": "About UNICEF",
+      "title1": "UNICEF",
+      "desc": "United Nations Children's Emergency Fund (UNICEF)",
+      "desc1": "The United Nations Children's Emergency Fund (UNICEF) was founded on December 11, 1946, by the United Nations General Assembly with the mission of providing food and healthcare to children in nations ruined by World War II. In 1953, it officially became a permanent institution within the United Nations. UNICEF operates in 155 countries worldwide, primarily focusing on improving community-level services to achieve its larger goal of child welfare and development. UNICEF also serves as a knowledge partner in the School Innovation Development Project."
+    }
+  },
+  {
+    "contact": {
+      "desc": "Contact Us",
+      "desc1": "EDI Institute Road, Ekkaduthangal,Chennai-32",
+      "desc2": ">Give us a Call",
+      "desc3": "Drop us an Email"
+    }
+  },
+  {
+    "team": {
+      "title": "Hear what our teacher and student innovators say about ATL Marathon",
+      "title1": "Here what they say about us",
+      "messageName1": "Suneeti Patwari",
+      "messageDescription1": "Our ATL marathon journey as a team has been an incredible roller coaster of innovation and collaboration. We worked hard and our hard work paid off as we emerged as one of the top 75 teams of ATL marathon 2021 and even got digital tablets from Niti Aayog as a prize for our achievement . It was like a dream come true. We have even filed for the patent of our project this year in 2023. ",
+      "messageDesignation1": " Student, Lakshmipat Singhania Academy, Kolkata",
+      "messageName2": "Ishan Ghatak & Agam Yadav",
+      "messageDescription2": "Our ATL marathon journey as a team has been an incredible roller coaster of innovation and collaboration. We worked hard and our hard work paid off as we emerged as one of the top 75 teams of ATL marathon 2021 and even got digital tablets from Niti Aayog as a prize for our achievement . It was like a dream come true. We have even filed for the patent of our project this year in 2023.",
+      "messageDesignation2": "D.A.V Public School, Vasant Kunj, New Delhi",
+      "messageName3": "Umesh Bajaj",
+      "messageDescription3": "I serve as the ATL Incharge at Dass and Brown World School in Ferozepur, Punjab. We recently featured in the Top 75 teams of ATL Marathon. The Atal Tinkering Lab has become like a second home to me. It's a place where my students and I engage in daily learning, finding solace in our lab. We are dedicated to working on solutions for the Sustainable Development Goals, and I am profoundly grateful to the Atal Innovation Mission for providing us with this platform to contribute to our community and nurture innovation in the young entrepreneurial minds.",
+      "messageDesignation3": "ATL Incharge, Dass & Brown World School, Ferozepur",
+      "messageName4": "Prashant Nair",
+      "messageDescription4": "ATL Marathon, the flagship national innovation challenge for schools from Atal Innovation Mission (AIM) has been a trailblazer, having completed 5 editions with the 2022-2023 edition attracting 12,000+  teams pan India. I have been fortunate to  have been able to mentor 10+ teams that have been ranked amongst the top teams over the last few years. ATL marathon provides an excellent opportunity for students to unleash their creativity, innovation and team work to solve problems for societal and humanitarian benefit",
+      "messageDesignation4": "Regional Mentor of Change, Tamil Nadu, AIM"
+    }
+  },
+  {
+    "partner": {
+      "title": "Our Partners"
+    }
+  },
+  {
+    "faq": {
+      "title": "FAQs and answers for the EDII’s Hackathon 2023:",
+      "question1": "What is the EDII’s Hackathon 2023?",
+      "answer1": "The EDII’s Hackathon 2023 is an innovative tech event aimed at bringing together creative minds to collaborate and develop solutions using cutting-edge technology to address real-world challenges.",
+      "question2": "Who can participate?",
+      "answer2": "Undergraduate Students of Engineering Colleges, Anna University colleges, University campus colleges, affiliated Arts and Science, Agriculture, Veterinary science and Fisheries colleges of various universities.",
+      "ans2": "UG students of select Deemed universities and autonomous colleges.",
+      "ans3": "Students of Polytechnics, and Industrial Training Institutes (ITI) in Tamil Nadu.",
+      "ans4": "These students form into 3-5 member teams to find solutions for the given local problems of their districts using technology in an innovative way.",
+      "ans5": "In such an innovation effort, the result found by the students is usually a newly developed marketable product. (prototype) It is expected that the local problems that are under pressure will be resolved.",
+      "question3": "How do I register for the hackathon?",
+      "answer3": "Registration details will be available soon on the official website www.editn.in. Keep an eye on our social media channels for updates.",
+      "question4": "Are there any prizes for winners?",
+      "answer4": "Yes, Category A : Bachelor of Engineering students from Anna University who are in their final year.",
+      "answer41": "Yes,",
+      "ans41": "First Prize - Rs.1 lakh each for top 10 teams.",
+      "ans51": "2nd PrizeRs.25000 each for 30 teams",
+      "ans6": "Category B : Other students. (Students studying in Anna University Engineering Colleges from 1st 3rd year, Polytechnic students, Bachelor students studying in Arts and Science Colleges, ITI students, Undergraduate students studying in recognized Associate Universities and Autonomous Colleges)",
+      "ans7": "First Prize - Rs.1 lakh each for top 20 teams",
+      "ans8": "2nd Prize Rs.25,000 each for 60 teams",
+      "ans9": "Students at each level will be awarded Certificate of participation, Certificate of Appreciation, Certificates for Student Mentors, Certificates for Leaders, Certificates for Best Higher Education Institutions",
+      "question5": "Will there be mentors or workshops during the hackathon?",
+      "answer5": "Yes, trained mentors from your institution will be there throughout the event to guide and assist. Workshops and boot camps will be organised for selected teams."
+    }
+  },
+  {
+    "map": {
+      "button": "ATL Marathon 2022-2023",
+      "button1": "ATL Marathon 2023-2024"
+    }
+  },
+  {
+    "flip": {
+      "agriculture": "Agriculture",
+      "desc": " The theme of agriculture encompasses a wide range of topics, from sustainable farming practices and technological advancements to food security, rural development, and the intricate relationship between humans and the natural world.",
+      "inclusivity": "Inclusivity",
+      "desc1": "Inclusivity is the principle of ensuring that all individuals, regardless of their background, abilities, or characteristics, have equal access and opportunities in various aspects of society. It promotes diversity, equity, and acceptance, fostering a more fair and accessible world for everyone.",
+      "disaster": "Disaster Management",
+      "desc2": "Disaster management is the systematic approach to preparing for, responding to, and recovering from natural or man-made disasters. It involves mitigation strategies, emergency response planning, and long-term recovery efforts",
+      "mobility": "Mobility",
+      "desc3": "Mobility is the concept of people and goods moving from one place to another, encompassing various modes of transportation such as cars, public transit, walking, and cycling. It's a critical aspect of modern life, impacting urban planning, environmental sustainability, and accessibility.",
+      "health": "Health",
+      "desc4": "Health is a state of physical, mental, and social well-being, encompassing not only the absence of illness but also the presence of positive factors for a fulfilling life. It's a fundamental aspect of human existence, and its promotion, maintenance, and access to healthcare services.",
+      "education": "Education & Skill Development",
+      "desc5": "Education and skill development are key elements in personal and societal growth. Education involves the acquisition of knowledge and the development of critical thinking, while skill development focuses on practical abilities.",
+      "space": "Space",
+      "desc6": "Space research and technology have advanced our understanding of the cosmos and have the potential to revolutionise various aspects of human life, from communication and navigation to environmental monitoring and future space exploration.",
+      "others": "Others"
+    }
+  }
+]

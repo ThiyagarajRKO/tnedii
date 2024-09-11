@@ -1,0 +1,200 @@
+<?php
+
+namespace Impiger\{Module}\Tables;
+
+use Auth;
+use BaseHelper;
+use Impiger\Base\Enums\BaseStatusEnum;
+use Impiger\{Module}\Repositories\Interfaces\{Name}Interface;
+use Impiger\Table\Abstracts\TableAbstract;
+use Illuminate\Contracts\Routing\UrlGenerator;
+use Yajra\DataTables\DataTables;
+use Impiger\{Module}\Models\{Name};
+use Html;
+use DB;
+use Illuminate\Support\Arr;
+use App\Utils\CrudHelper;
+
+
+class {Name}Table extends TableAbstract
+{
+
+    /**
+     * @var bool
+     */
+    protected $hasActions = true;
+
+    /**
+     * @var bool
+     */
+    protected $hasFilter = true;
+
+    /**
+     * @var string
+     */
+    protected $view = {table_view};
+    protected $editPermissions = "{grid_action_edit_button}";
+    protected $deletePermissions = "{grid_action_delete_button}";
+    /* @customized by Sabari Shankar.Parthiban*/
+    protected $printPreview = 'base.print';
+    /**
+     * {Name}Table constructor.
+     * @param DataTables $table
+     * @param UrlGenerator $urlGenerator
+     * @param {Name}Interface ${+name}Repository
+     */
+    public function __construct(DataTables $table, UrlGenerator $urlGenerator, {Name}Interface ${+name}Repository)
+    {
+        $this->repository = ${+name}Repository;
+        $this->setOption('id', '{types}-{-name}-table');
+        parent::__construct($table, $urlGenerator);
+
+        {grid_action_permission}
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function ajax()
+    {
+        $data = $this->table
+            ->eloquent($this->query())
+            ->editColumn('name', function ($item) {
+                $this->checkDefault($item);
+                $isEdit =  (!empty($this->editPermissions));
+                $isPublic =  $this->getOption('shortcode');
+
+                #{hideOnEditLink}
+                return CrudHelper::getNameFieldLink($item, '{-name}', $isEdit, $isPublic);
+            })
+            ->editColumn('checkbox', function ($item) {
+                return $this->getCheckbox($item->id);
+            })
+            {grid_column_lookups}
+            {set_grid_column_row_class}
+            ->editColumn('created_at', function ($item) {
+                return BaseHelper::formatDate($item->created_at);
+            })
+            ->addColumn('operations', function ($item) {
+                $editPermissions = $this->editPermissions;$deletePermissions = $this->deletePermissions;
+                $this->checkDefault($item);
+                #{hideOnEditAction}
+                #{hideOnDeleteAction}
+                return $this->getOperations($this->editPermissions, $this->deletePermissions, $item, {grid_action_extra_buttons});
+            });
+
+            return $this->toJson($data);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function query()
+    {
+        $model = $this->repository->getModel();
+        $select = [
+            {grid_columns_field_name}
+        ];
+
+        $query = $model->select($select){query_builder};
+
+        return $this->applyScopes(apply_filters(BASE_FILTER_TABLE_QUERY, $query, $model, $select));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function columns()
+    {
+        return [
+            {grid_columns_config}
+        ];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function buttons()
+    {
+        if (!$this->hasActions) {
+            return [];
+        }
+
+        $buttons = {grid_action_create_button};
+        {import_button}
+        {inline_edit_button}
+        return apply_filters(BASE_FILTER_TABLE_BUTTONS, $buttons, {Name}::class);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function bulkActions(): array
+    {
+        if (Auth::user() && !Auth::user()->hasPermission('{-name}.edit') {inline_edit_permission}) {
+                    return [];
+                }
+        return $this->addDeleteAction(route('{-name}.deletes'), '{-name}.destroy', parent::bulkActions());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getBulkChanges($isFilter = false): array
+    {
+        return CrudHelper::getBulkChanges('{-name}', $isFilter, {isSubscription});
+    }
+
+    /**
+     * @return array
+     */
+    public function getFilters(): array
+    {
+        return $this->getBulkChanges(true);
+    }
+
+    /**
+     * @return array
+     */
+    public function getDefaultButtons(): array
+    {
+        $defaultBtns = parent::getDefaultButtons();
+
+        if (!$this->hasActions) {
+            return $defaultBtns;
+        }
+
+        if (Auth::user() && Auth::user()->hasPermission('{-name}.export')) {
+            $defaultBtns = array_merge($defaultBtns, ['export']);
+        }
+
+        if (Auth::user() && Auth::user()->hasPermission('{-name}.print')) {
+            $defaultBtns = array_merge($defaultBtns, ['print']);
+        }
+
+        return $defaultBtns;
+    }
+
+    protected function checkDefault($item){
+        if( isset($item->is_default) && $item->is_default){
+            if(Auth::user() && (Auth::user()->is_admin || Auth::user()->isSuperUser())){
+                $this->editPermissions = '{-name}.edit';
+            }else{
+                $this->editPermissions = '';
+            }
+            $this->deletePermissions = '';
+        }
+    }
+
+    public function setTableConfig($config): self
+    {
+        $this->hasActions = (isset($config->hasActions)) ? $config->hasActions : false;
+        $this->hasOperations = (isset($config->hasOperations)) ? $config->hasOperations : false;
+        $this->hasCheckbox = (isset($config->hasCheckbox)) ? $config->hasCheckbox : false;
+        $this->pageLength = (isset($config->pageLength)) ? $config->pageLength : $this->pageLength;
+        return $this;
+    }
+
+    {apply_subscription_filter_cndn}
+
+}

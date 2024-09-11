@@ -1,0 +1,32 @@
+@php $hubs= \App\Utils\CrudHelper::getSelectBoxChoices([], 'external', 'hub_institutions', 'name', 'id','district = '.$data->join_fields()->district_id) @endphp
+<div class="form-group">
+        <label for="hubs" class="control-label required">Hubs</label>
+        <div class="ui-select-wrapper">
+            <input type="hidden" name="custom_input[0][field]" value="hubs">
+            <input type="hidden" name="custom_input[0][validation]" value="required">
+            <select name="custom_input[req][hubs]" id="hubs" class="form-control ui-select">
+                <option value="">Select</option>
+                @foreach($hubs as $id => $name)
+                <option value="{{ $name }}">
+                    {{$name}}
+                </option>
+                @endforeach
+            </select>
+            <svg class="svg-next-icon svg-next-icon-size-16">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use>
+            </svg>
+        </div>
+</div>
+<div class="form-group">
+        <label for="date" class="control-label required">Date</label>
+        <input type="hidden" name="custom_input[1][field]" value="date">
+        <input type="hidden" name="custom_input[1][validation]" value="required|date">
+        <div class="input-group">
+        <input class="form-control datepicker is-valid" data-date-format="yyyy-mm-dd" data-date-start-date="0d" name="custom_input[req][date]" type="text" value="" id="date" autocomplete="off" aria-invalid="false" aria-describedby="date-error">
+        <span class="input-group-prepend">
+            <button class="btn default" type="button">
+                <i class="fa fa-calendar"></i>
+            </button>
+        </span>
+    </div>
+</div>

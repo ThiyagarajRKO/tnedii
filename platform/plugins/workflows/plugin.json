@@ -1,0 +1,9 @@
+{
+    "name": "Workflows",
+    "namespace": "Impiger\\Workflows\\",
+    "provider": "Impiger\\Workflows\\Providers\\WorkflowsServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "N/A",
+    "version": "1.0",
+    "description": "The description for module workflows"
+}

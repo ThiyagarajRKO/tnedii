@@ -1,0 +1,9 @@
+{
+    "name": "MaintenanceMode",
+    "namespace": "Impiger\\MaintenanceMode\\",
+    "provider": "Impiger\\MaintenanceMode\\Providers\\MaintenanceModeServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "https://impigertech.com",
+    "version": "5.3",
+    "description": "The description for plugin maintenance_mode"
+}

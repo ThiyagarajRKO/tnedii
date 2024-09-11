@@ -1,0 +1,24 @@
+{
+    "name": "impiger/menu",
+    "description": "Menu package for Impiger CMS application",
+    "type": "package",
+    "autoload": {
+        "psr-4": {
+            "Impiger\\Menu\\": "src"
+        }
+    },
+    "require": {
+        "impiger/platform": "*@dev",
+        "impiger/theme": "*@dev"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Impiger\\Menu\\Providers\\MenuServiceProvider"
+            ],
+            "aliases": {
+                "Menu": "Impiger\\Menu\\Facades\\MenuFacade"
+            }
+        }
+    }
+}

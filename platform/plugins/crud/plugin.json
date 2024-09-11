@@ -1,0 +1,9 @@
+{
+    "name": "Crud Builder",
+    "namespace": "Impiger\\Crud\\",
+    "provider": "Impiger\\Crud\\Providers\\CrudServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "http://impigertech.com",
+    "version": "1.0",
+    "description": "create & manage modules using crud"
+}

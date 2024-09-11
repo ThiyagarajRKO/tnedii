@@ -1,0 +1,20 @@
+{
+  "name": "impiger/workflow-transition",
+  "description": "WorkflowTransition package for Impiger CMS application",
+  "type": "package",
+  "autoload": {
+    "psr-4": {
+      "Impiger\\WorkflowTransition\\": "src"
+    }
+  },
+  "require": {
+
+  },
+  "extra":{
+    "laravel":{
+      "providers":[
+        "Impiger\\WorkflowTransition\\Providers\\WorkflowTransitionServiceProvider"
+      ]
+    }
+  }
+}

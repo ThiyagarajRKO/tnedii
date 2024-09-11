@@ -1,0 +1,9 @@
+{
+    "name": "Translation",
+    "namespace": "Impiger\\Translation\\",
+    "provider": "Impiger\\Translation\\Providers\\TranslationServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "https://impigertech.com",
+    "version": "5.8",
+    "description": "Manage translation text"
+}

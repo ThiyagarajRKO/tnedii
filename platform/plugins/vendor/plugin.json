@@ -1,0 +1,9 @@
+{
+    "name": "Vendor",
+    "namespace": "Impiger\\Vendor\\",
+    "provider": "Impiger\\Vendor\\Providers\\VendorServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "N/A",
+    "version": "1.0",
+    "description": "The description for module vendor"
+}

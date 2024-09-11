@@ -1,0 +1,56 @@
+<?php
+
+Route::group(['namespace' => 'Impiger\{Module}\Http\Controllers', 'middleware' => ['web', 'core']], function () {
+
+    Route::group(['prefix' => BaseHelper::getAdminPrefix(), 'middleware' => 'auth'], function () {
+
+        Route::group(['prefix' => '{-names}', 'as' => '{-name}.'], function () {
+            Route::resource('', '{Name}Controller')->parameters(['' => '{-name}']);
+            Route::delete('items/destroy', [
+                'as'         => 'deletes',
+                'uses'       => '{Name}Controller@deletes',
+                'permission' => '{-name}.destroy',
+            ]);
+
+            Route::get('viewdetail/{any}', [
+                'uses'       => '{Name}Controller@viewdetail',
+                'permission' => '{-name}.index',
+            ]);
+            
+            {viewgallery_route}
+            {edit-profile-route}
+            Route::post('import', [
+                'as'         => 'import',
+                'uses'       => '{Name}Controller@postImport',
+                'permission' => '{-name}.index',
+				]);
+        });
+        #{submodule_routes}
+        
+        Route::get('/admin/{Name}/create', 'platform\plugins\src\Http\Controllers\{Name}Controller@create')->name('{Name}.create');
+ 
+        Route::get('/admin/{Name}', 'platform\plugins\src\Http\Controllers\{Name}Controller@index')->name('{Name}.index');
+
+        Route::post('/admin/{Name}', 'platform\plugins\src\Http\Controllers\{Name}Controller@store')->name('{Name}.store');
+
+        Route::get('/admin/{Name}/{any}/edit', 'platform\plugins\src\Http\Controllers\{Name}Controller@edit')->name('{Name}.edit');
+
+        Route::get('/admin/{Name}/{any}', 'platform\plugins\src\Http\Controllers\{Name}Controller@show')->name('{Name}.show');
+    });
+
+    Route::group(apply_filters(BASE_FILTER_GROUP_PUBLIC_ROUTE, []), function () {
+        Route::post('{-module}/postdata', [
+            'as'   => 'public.{-module}.postdata',
+            'uses' => '{Module}PublicController@postData',
+        ]);
+        Route::post('{-module}/updatedata/{any}', [
+            'as'   => 'public.{-module}.updatedata',
+            'uses' => '{Module}PublicController@updateData',
+        ]);
+        Route::get('{-module}', [
+            'as'   => 'public.{-module}.index',
+            'uses' => '{Module}PublicController@index',
+        ]);
+        #{submodule_public_routes}
+    });
+});

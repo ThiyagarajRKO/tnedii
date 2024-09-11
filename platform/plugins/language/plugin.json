@@ -1,0 +1,9 @@
+{
+    "name": "Language",
+    "namespace": "Impiger\\Language\\",
+    "provider": "Impiger\\Language\\Providers\\LanguageServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "https://impigertech.com",
+    "version": "5.8",
+    "description": "Multilingual for Impiger CMS"
+}

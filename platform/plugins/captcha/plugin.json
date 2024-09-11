@@ -1,0 +1,9 @@
+{
+    "name": "Captcha",
+    "namespace": "Impiger\\Captcha\\",
+    "provider": "Impiger\\Captcha\\Providers\\CaptchaServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "https://impigertech.com",
+    "version": "5.8",
+    "description": "Captcha for higher security"
+}

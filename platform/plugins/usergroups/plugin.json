@@ -1,0 +1,9 @@
+{
+    "name": "Usergroups",
+    "namespace": "Impiger\\Usergroups\\",
+    "provider": "Impiger\\Usergroups\\Providers\\UsergroupsServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "https://impigertech.com",
+    "version": "1.0",
+    "description": "Map the roles with the usergroups"
+}

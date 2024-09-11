@@ -1,0 +1,32 @@
+{
+    "name": "impiger/theme",
+    "description": "Theme package for Impiger CMS application",
+    "type": "package",
+    "autoload": {
+        "psr-4": {
+            "Impiger\\Theme\\": "src"
+        }
+    },
+    "require": {
+        "impiger/platform": "*@dev",
+        "impiger/sitemap": "*@dev",
+        "impiger/widget": "*@dev",
+        "impiger/slug": "*@dev",
+        "impiger/seo-helper": "*@dev"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Impiger\\Theme\\Providers\\ThemeServiceProvider",
+                "Impiger\\Theme\\Providers\\RouteServiceProvider"
+            ],
+            "aliases": {
+                "Theme": "Impiger\\Theme\\Facades\\ThemeFacade",
+                "ThemeOption": "Impiger\\Theme\\Facades\\ThemeOptionFacade",
+                "ThemeManager": "Impiger\\Theme\\Facades\\ManagerFacade",
+                "AdminBar": "Impiger\\Theme\\Facades\\AdminBarFacade",
+                "SiteMapManager": "Impiger\\Theme\\Facades\\SiteMapManagerFacade"
+            }
+        }
+    }
+}

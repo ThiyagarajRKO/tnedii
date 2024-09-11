@@ -1,0 +1,9 @@
+{
+    "name": "Request Log",
+    "namespace": "Impiger\\RequestLog\\",
+    "provider": "Impiger\\RequestLog\\Providers\\RequestLogServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "https://impigertech.com",
+    "version": "5.8",
+    "description": "Log error requests"
+}

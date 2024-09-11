@@ -1,0 +1,10 @@
+<?php
+
+namespace Impiger\TrainingTitleFinancialDetail\Repositories\Eloquent;
+
+use Impiger\Support\Repositories\Eloquent\RepositoriesAbstract;
+use Impiger\TrainingTitleFinancialDetail\Repositories\Interfaces\TrainingTitleFinancialDetailInterface;
+
+class TrainingTitleFinancialDetailRepository extends RepositoriesAbstract implements TrainingTitleFinancialDetailInterface
+{
+}

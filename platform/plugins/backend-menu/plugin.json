@@ -1,0 +1,9 @@
+{
+    "name": "BackendMenu",
+    "namespace": "Impiger\\BackendMenu\\",
+    "provider": "Impiger\\BackendMenu\\Providers\\BackendMenuServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "N/A",
+    "version": "1.0",
+    "description": "The description for module backend_menu"
+}

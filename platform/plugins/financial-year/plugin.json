@@ -1,0 +1,9 @@
+{
+    "name": "FinancialYear",
+    "namespace": "Impiger\\FinancialYear\\",
+    "provider": "Impiger\\FinancialYear\\Providers\\FinancialYearServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "N/A",
+    "version": "1.0",
+    "description": "The description for module financial_year"
+}

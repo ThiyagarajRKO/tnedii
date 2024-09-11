@@ -1,0 +1,1 @@
+Dear {first_name},<br><br>New account has been created in Emircom.<br><br>Username : {email} <br>Password : {temp_password}<br>Kindly use this <a href='{domain_href}'>URL</a> to login<br><br>If you are wrong person, Please ignore this email.<br><br>Thank you

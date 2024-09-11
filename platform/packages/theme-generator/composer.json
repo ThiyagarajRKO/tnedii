@@ -1,0 +1,21 @@
+{
+    "name": "impiger/theme-generator",
+    "description": "Theme generator",
+    "type": "package",
+    "autoload": {
+        "psr-4": {
+            "Impiger\\ThemeGenerator\\": "src"
+        }
+    },
+    "require": {
+        "impiger/platform": "*@dev",
+        "impiger/theme": "*@dev"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Impiger\\ThemeGenerator\\Providers\\ThemeGeneratorServiceProvider"
+            ]
+        }
+    }
+}

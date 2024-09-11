@@ -1,0 +1,9 @@
+{
+    "name": "Entrepreneur",
+    "namespace": "Impiger\\Entrepreneur\\",
+    "provider": "Impiger\\Entrepreneur\\Providers\\EntrepreneurServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "N/A",
+    "version": "1.0",
+    "description": "The description for module entrepreneur"
+}

@@ -1,0 +1,9 @@
+{
+    "name": "{Module}",
+    "namespace": "Impiger\\{Module}\\",
+    "provider": "Impiger\\{Module}\\Providers\\{Module}ServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "N/A",
+    "version": "1.0",
+    "description": "The description for module {module}"
+}

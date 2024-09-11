@@ -1,0 +1,9 @@
+{
+    "name": "Custom Fields",
+    "namespace": "Impiger\\CustomField\\",
+    "provider": "Impiger\\CustomField\\Providers\\CustomFieldServiceProvider",
+    "author": "Impiger Technologies",
+    "url": "https://impigertech.com",
+    "version": "5.8",
+    "description": "Custom Fields"
+}
