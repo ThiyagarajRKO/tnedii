@@ -11,3 +11,6 @@
 |
 */
 
+// Route::POST('/ivp/register', ['as' => 'public.user.postdata', 'uses' => 'Impiger\User\Http\Controllers\UserPublicController@registerIVP']);
+Route::post('/ivp/register', [\Impiger\User\Http\Controllers\UserPublicController::class, 'registerIVP'])
+    ->name('public.user.postdata');
