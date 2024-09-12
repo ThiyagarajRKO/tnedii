@@ -16,7 +16,7 @@ function getIdfromValue($tableName, $cond)
     }
 }
 
-function getValueFromId($tableName, $cond,$field = 'name')
+function getValueFromId($tableName, $cond, $field = 'name')
 {
     if (!$tableName && $cond) {
         return null;
@@ -28,14 +28,15 @@ function getValueFromId($tableName, $cond,$field = 'name')
 }
 
 
-function getEmailIdsfromRoles($roleSlug, $data = null) {
+function getEmailIdsfromRoles($roleSlug, $data = null)
+{
     if (!$roleSlug && !is_int($roleSlug)) {
         \Log::warning(" Id is not a integer t fetch the user emails ");
         return null;
     }
     $query = \DB::table('roles')->where('slug', $roleSlug)
-            ->leftjoin('role_users', 'roles.id', '=', 'role_users.role_id')
-            ->leftjoin('users', 'users.id', '=', 'role_users.user_id');
+        ->leftjoin('role_users', 'roles.id', '=', 'role_users.role_id')
+        ->leftjoin('users', 'users.id', '=', 'role_users.user_id');
 
     $model = "Impiger\ACL\Models\UserPermission";
 
@@ -45,7 +46,7 @@ function getEmailIdsfromRoles($roleSlug, $data = null) {
         $query = apply_filters(BASE_FILTER_TABLE_QUERY, $query, $model, ['users.*'], false);
     }
 
-    $emails = $query->select('users.email as email',DB::raw('concat(coalesce(users.first_name,"")," ",coalesce(users.last_name,"")) as username'))->pluck('email','username')->toArray();
+    $emails = $query->select('users.email as email', DB::raw('concat(coalesce(users.first_name,"")," ",coalesce(users.last_name,"")) as username'))->pluck('email', 'username')->toArray();
     if (!empty($emails)) {
         return $emails;
     }
@@ -58,8 +59,8 @@ function getEmailIdsfromUsers($userId)
         \Log::warning(" Id is not a integer t fetch the user emails ");
         return null;
     }
-    $emails = \DB::table('users')->select('users.email as email',DB::raw('concat(coalesce(first_name,"")," ",coalesce(last_name,"")) as username'))->where('id', $userId)->first()
-        ;
+    $emails = \DB::table('users')->select('users.email as email', DB::raw('concat(coalesce(first_name,"")," ",coalesce(last_name,"")) as username'))->where('id', $userId)->first()
+    ;
     if (!empty($emails)) {
         return $emails;
     }
@@ -73,17 +74,17 @@ function getAttributeOptionId($slug)
     }
     $attributeOptionId = NULL;
     $query = DB::table('attribute_options');
-            if(is_array($slug)){
-                $attributeOption = $query->whereIn('slug', $slug)->get();
-            }else{
-                $attributeOption = $query->where('slug', $slug)->first();
-            }
+    if (is_array($slug)) {
+        $attributeOption = $query->whereIn('slug', $slug)->get();
+    } else {
+        $attributeOption = $query->where('slug', $slug)->first();
+    }
     if (!empty($attributeOption)) {
-        if(!isset($attributeOption->id) && $attributeOption->count() >0){
-            foreach($attributeOption as $row){
+        if (!isset($attributeOption->id) && $attributeOption->count() > 0) {
+            foreach ($attributeOption as $row) {
                 $attributeOptionId[] = $row->id;
             }
-        }else{
+        } else {
             $attributeOptionId = $attributeOption->id;
         }
 
@@ -206,7 +207,7 @@ if (!function_exists('customcaptcha_api_check')) {
      * @return bool
      */
     function customcaptcha_api_check(string $value, string $key, string $config = 'default'): bool
-   {
+    {
         return app('customcaptcha')->check_api($value, $key, $config);
     }
 }
@@ -215,7 +216,7 @@ function generateRandomPassword($length, $alphabet, $totLen)
 {
     $pass = array(); //remember to declare $pass as an array
     for ($i = 0; $i < $length; $i++) {
-        $n = rand(0, $totLen-1);
+        $n = rand(0, $totLen - 1);
         $pass[] = $alphabet[$n];
     }
     return implode($pass); //turn the array into a string
@@ -235,14 +236,15 @@ function checkAtleastOneValueExist($inputArray, $excludeColumns = [])
     return $output;
 }
 
-function joinTableExists($query, $table, $alias = NULL) {
+function joinTableExists($query, $table, $alias = NULL)
+{
     $tableExists = false;
-    $queryBuilder = (get_class($query) != "Illuminate\Database\Query\Builder") ? $query->getQuery() :$query ;
+    $queryBuilder = (get_class($query) != "Illuminate\Database\Query\Builder") ? $query->getQuery() : $query;
     if (isset($queryBuilder->joins)) {
         foreach ($queryBuilder->joins as $join) {
-            if (!$alias && ($join->table == $table  || Str::startsWith($join->table, $table." "))) {
+            if (!$alias && ($join->table == $table || Str::startsWith($join->table, $table . " "))) {
                 return $tableExists = true;
-            } elseif($alias && ($join->table == $table. " ".$alias || $join->table == $table. " AS ".$alias)){
+            } elseif ($alias && ($join->table == $table . " " . $alias || $join->table == $table . " AS " . $alias)) {
                 return $tableExists = true;
             }
         }
@@ -251,13 +253,16 @@ function joinTableExists($query, $table, $alias = NULL) {
     return $tableExists;
 }
 
-function cndnExists($query, $field, $value, $type = 'Basic') {
+function cndnExists($query, $field, $value, $type = 'Basic')
+{
     $tableExists = false;
-    $queryBuilder = (get_class($query) != "Illuminate\Database\Query\Builder") ? $query->getQuery() :$query ;
+    $queryBuilder = (get_class($query) != "Illuminate\Database\Query\Builder") ? $query->getQuery() : $query;
     if (isset($queryBuilder->wheres)) {
         foreach ($queryBuilder->wheres as $cndn) {
-            if ($cndn['type'] == $type && $cndn['column'] == $field &&
-            $cndn['value'] == $value) {
+            if (
+                $cndn['type'] == $type && $cndn['column'] == $field &&
+                $cndn['value'] == $value
+            ) {
                 return $tableExists = true;
             }
         }
@@ -308,13 +313,14 @@ if (!function_exists('getEntityId')) {
      * param $moduleName
      * return id
      */
-    function getEntityId($moduleName,$field = 'module_name') {
+    function getEntityId($moduleName, $field = 'module_name')
+    {
         if (!$moduleName) {
             return null;
         }
         $entityId = "";
         $entity = DB::table('cruds')->select('id', 'module_name')->where(['is_entity' => 1, $field => $moduleName])->first();
-        if($entity){
+        if ($entity) {
             $entityId = $entity->id;
         }
         return $entityId;
@@ -327,13 +333,14 @@ if (!function_exists('getModuleDetails')) {
      * param $moduleName
      * return id
      */
-    function getModuleDetails($moduleTable,$field = 'module_name') {
+    function getModuleDetails($moduleTable, $field = 'module_name')
+    {
         if (!$moduleTable) {
             return null;
         }
         $moduleField = "";
         $module = DB::table('cruds')->select('id', $field)->where(['module_db' => $moduleTable])->first();
-        if($module){
+        if ($module) {
             $moduleField = $module->$field;
         }
         return $moduleField;
@@ -387,7 +394,7 @@ if (!function_exists('base64DecodeQueryParams')) {
 if (!function_exists('isValidArray')) {
     function isValidArray($input)
     {
-        if($input && is_array($input) && count($input) > 0) {
+        if ($input && is_array($input) && count($input) > 0) {
             return $input;
         }
 
@@ -402,18 +409,18 @@ if (!function_exists('isValidArray')) {
  * @return integer
  */
 if (!function_exists('getImpId')) {
-    function getImpId($table,$userId = null)
+    function getImpId($table, $userId = null)
     {
         $impId = Null;
-        if(!$table){
+        if (!$table) {
             return $impId;
         }
-        if(!\Illuminate\Support\Facades\Schema::hasTable($table)){
+        if (!\Illuminate\Support\Facades\Schema::hasTable($table)) {
             return $impId;
         }
-        $userId = ($userId) ? : Auth::id();
-        $impiger = DB::table($table)->where('user_id',$userId)->first();
-        if($impiger){
+        $userId = ($userId) ?: Auth::id();
+        $impiger = DB::table($table)->where('user_id', $userId)->first();
+        if ($impiger) {
             $impId = $impiger->id;
         }
         return $impId;
@@ -425,18 +432,18 @@ if (!function_exists('getImpId')) {
  * @return integer
  */
 if (!function_exists('getUserId')) {
-    function getUserId($table,$id)
+    function getUserId($table, $id)
     {
         $userId = Null;
-        if(!$table && !$id){
+        if (!$table && !$id) {
             return $userId;
         }
-        if(!\Illuminate\Support\Facades\Schema::hasTable($table)){
+        if (!\Illuminate\Support\Facades\Schema::hasTable($table)) {
             return $userId;
         }
 
-        $impiger = DB::table($table)->where('id',$id)->first();
-        if($impiger){
+        $impiger = DB::table($table)->where('id', $id)->first();
+        if ($impiger) {
             $userId = $impiger->user_id;
         }
         return $userId;
@@ -452,11 +459,11 @@ if (!function_exists('getRoleIdFromSlug')) {
     function getRoleIdFromSlug($slug)
     {
         $roleId = Null;
-        if(!$slug){
+        if (!$slug) {
             return $roleId;
         }
-        $roles = Impiger\ACL\Models\Role::where('slug',$slug)->first();
-        if($roles){
+        $roles = Impiger\ACL\Models\Role::where('slug', $slug)->first();
+        if ($roles) {
             $roleId = $roles->id;
         }
         return $roleId;
@@ -465,13 +472,14 @@ if (!function_exists('getRoleIdFromSlug')) {
 }
 
 if (!function_exists('filterByArrayValue')) {
-    function filterByArrayValue($inputArray, $filterKey, $filterValue, $returnAll = false) {
+    function filterByArrayValue($inputArray, $filterKey, $filterValue, $returnAll = false)
+    {
         $output = false;
-        $filtered = Arr::where($inputArray, function ($value, $key) use($filterKey, $filterValue) {
+        $filtered = Arr::where($inputArray, function ($value, $key) use ($filterKey, $filterValue) {
             return ($value[$filterKey] == $filterValue);
         });
 
-        if(count($filtered) > 0) {
+        if (count($filtered) > 0) {
             $value = array_values($filtered);
             $output = ($returnAll) ? $value : $value[0];
         }
@@ -481,17 +489,18 @@ if (!function_exists('filterByArrayValue')) {
 }
 
 if (!function_exists('reArrangeDashboardWidgets')) {
-    function reArrangeDashboardWidgets($widgets, $widgetData) {
+    function reArrangeDashboardWidgets($widgets, $widgetData)
+    {
         $availableOrder = [];
         $i = 0;
-        foreach($widgets as $widget) {
-            if(\Arr::has($widgetData,$widget->name)) {
+        foreach ($widgets as $widget) {
+            if (\Arr::has($widgetData, $widget->name)) {
                 $widgetSetting = $widget ? $widget->settings->first() : null;
                 if (!empty($widgetSetting) && !array_key_exists($widgetSetting->order, $widgetData)) {
                     $widgetData[$widgetSetting->order] = $widgetData[$widget->name];
                     $availableOrder[] = $widgetSetting->order;
                 } else {
-                    $widgetData['-'.$i] = $widgetData[$widget->name];
+                    $widgetData['-' . $i] = $widgetData[$widget->name];
                     $i++;
                 }
                 unset($widgetData[$widget->name]);
@@ -502,17 +511,18 @@ if (!function_exists('reArrangeDashboardWidgets')) {
 }
 
 if (!function_exists('getRequestFilters')) {
-    function getRequestFilters($removeAlias = false, $withOperator = false) {
+    function getRequestFilters($removeAlias = false, $withOperator = false)
+    {
         $requestFilters = [];
         $request = request();
         if ($request->input('filter_columns')) {
             foreach ($request->input('filter_columns', []) as $key => $item) {
                 $columnKey = ($removeAlias) ? Str::afterLast($item, ".") : $item;
-                if($withOperator) {
+                if ($withOperator) {
                     $requestFilters[] = [
-                        'column'   => $columnKey,
+                        'column' => $columnKey,
                         'operator' => $request->input('filter_operators.' . $key),
-                        'value'    => $request->input('filter_values.' . $key),
+                        'value' => $request->input('filter_values.' . $key),
                     ];
                 } else {
                     $requestFilters[$columnKey] = $request->input('filter_values.' . $key);
@@ -527,16 +537,16 @@ if (!function_exists('getRequestFilters')) {
 if (!function_exists('getAppEntitiesFromSession')) {
     function getAppEntitiesFromSession($hasModuleDB = false)
     {
-        if($hasModuleDB) {
-            if(!session()->has('app_entities_with_table'))  {
-                $entities =  \App\Models\Crud::where('is_entity', 1)->select(['id', 'module_db'])->pluck('module_db', 'id')->toArray();
+        if ($hasModuleDB) {
+            if (!session()->has('app_entities_with_table')) {
+                $entities = \App\Models\Crud::where('is_entity', 1)->select(['id', 'module_db'])->pluck('module_db', 'id')->toArray();
                 session()->put('app_entities_with_table', $entities);
             }
 
             return session()->get('app_entities_with_table');
         }
-        if(!session()->has('app_entities'))  {
-            $entities =  \App\Models\Crud::where('is_entity', 1)->select(['id', 'module_name'])->pluck('id', 'module_name')->toArray();
+        if (!session()->has('app_entities')) {
+            $entities = \App\Models\Crud::where('is_entity', 1)->select(['id', 'module_name'])->pluck('id', 'module_name')->toArray();
             session()->put('app_entities', $entities);
         }
 
@@ -547,8 +557,8 @@ if (!function_exists('getAppEntitiesFromSession')) {
 if (!function_exists('getUserEntitiesFromSession')) {
     function getUserEntitiesFromSession()
     {
-        if(!session()->has('user_entity'))  {
-            $userEntity =  \Auth::user()->userEntity();
+        if (!session()->has('user_entity')) {
+            $userEntity = \Auth::user()->userEntity();
             session()->put('user_entity', $userEntity);
             return $userEntity;
         }
@@ -560,133 +570,142 @@ if (!function_exists('getUserEntitiesFromSession')) {
 
 
 if (!function_exists('getCurrencyCode')) {
-    function getCurrencyCode() {
-	    if(!session()->has('currency')) {
-	    $currency = DB::table('countries')->where('id', setting('default_country'))->get()->pluck('currency_code')->first();
-	    session()->put('currency', $currency);
-	    return $currency;
-	    }
-	    return session()->get('currency');
-	}
-}
-    function getUserDomainUrl($userId) {
-        $domainIds=[];
-        if(is_plugin_active('multidomains')){
-            $domainIds=app(\Impiger\Multidomain\Multidomain::class)->getDomainIdsByUserLogin($userId);
+    function getCurrencyCode()
+    {
+        if (!session()->has('currency')) {
+            $currency = DB::table('countries')->where('id', setting('default_country'))->get()->pluck('currency_code')->first();
+            session()->put('currency', $currency);
+            return $currency;
         }
-         if(!empty($domainIds) && count($domainIds)==1)
-         {
-            $domain = DB::table("multidomains")->where('id',$domainIds)->first();
-            if (env('APP_ENV')!== 'local') {
-                    return 'https://'.$domain->name;
-            }
-             return 'http://'.$domain->name;
-         }
-         else{
-            return env('APP_URL');
-         }
+        return session()->get('currency');
     }
+}
+function getUserDomainUrl($userId)
+{
+    $domainIds = [];
+    if (is_plugin_active('multidomains')) {
+        $domainIds = app(\Impiger\Multidomain\Multidomain::class)->getDomainIdsByUserLogin($userId);
+    }
+    if (!empty($domainIds) && count($domainIds) == 1) {
+        $domain = DB::table("multidomains")->where('id', $domainIds)->first();
+        if (env('APP_ENV') !== 'local') {
+            return 'https://' . $domain->name;
+        }
+        return 'http://' . $domain->name;
+    } else {
+        return env('APP_URL');
+    }
+}
 
-    function inArrayAny($needles, $haystack) {
-        return !empty(array_intersect($needles, $haystack));
-     }
+function inArrayAny($needles, $haystack)
+{
+    return !empty(array_intersect($needles, $haystack));
+}
 
-     if (!function_exists('getAllowedDashboardWidgets')) {
-     function getAllowedDashboardWidgets()
-     {
-         if(!session()->has('allowed_dash_widgets'))  {
+if (!function_exists('getAllowedDashboardWidgets')) {
+    function getAllowedDashboardWidgets()
+    {
+        if (!session()->has('allowed_dash_widgets')) {
             $allowedWidgets = \Impiger\Dashboard\Models\DashboardWidgetSetting::select([DB::raw('REPLACE(REPLACE(W.name, "pie-", ""), "bar-","") AS name')])
-            ->leftJoin('dashboard_widgets AS W', 'W.id', '=', 'widget_id')
-            ->where(['user_id' => Auth::id(), 'dashboard_widget_settings.status' => 1])->pluck('name')->toArray();
-             session()->put('allowed_dash_widgets', $allowedWidgets);
-             return $allowedWidgets;
-         }
+                ->leftJoin('dashboard_widgets AS W', 'W.id', '=', 'widget_id')
+                ->where(['user_id' => Auth::id(), 'dashboard_widget_settings.status' => 1])->pluck('name')->toArray();
+            session()->put('allowed_dash_widgets', $allowedWidgets);
+            return $allowedWidgets;
+        }
 
-         return session()->get('allowed_dash_widgets');
-     }
- }
+        return session()->get('allowed_dash_widgets');
+    }
+}
 
- function getLinks($url, $text) {
-   return ($url) ? \Html::link($url, $text,['target' => '_blank']): $text;
- }
+function getLinks($url, $text)
+{
+    return ($url) ? \Html::link($url, $text, ['target' => '_blank']) : $text;
+}
 
- function isFillableField($model, $field) {
-    if(!$model || !$field) {
+function isFillableField($model, $field)
+{
+    if (!$model || !$field) {
         return false;
     }
 
     $fillable = $model->getFillable();
-    return isValidArray($fillable) ?  in_array($field, $fillable) : false;
- }
+    return isValidArray($fillable) ? in_array($field, $fillable) : false;
+}
 
- function isVendorRequest($userId) {
-    if(!$userId) {
+function isVendorRequest($userId)
+{
+    if (!$userId) {
         return true;
     }
-    $coreUser = \Impiger\ACL\Models\User::where('id',$userId)->first();
+    $coreUser = \Impiger\ACL\Models\User::where('id', $userId)->first();
     $isRequest = ($coreUser && $coreUser->last_login) ? false : true;
     return $isRequest;
- }
+}
 
- function getVendorIdbyLogin(){
-     $vendor = Impiger\VendorRequest\Models\VendorRequest::where('user_id',\Auth::id())->first();
-     if($vendor){
-         return $vendor->id;
-     }
-     return null;
- }
+function getVendorIdbyLogin()
+{
+    $vendor = Impiger\VendorRequest\Models\VendorRequest::where('user_id', \Auth::id())->first();
+    if ($vendor) {
+        return $vendor->id;
+    }
+    return null;
+}
 
- function isVendorUser(){
-     $user = \Auth::user();
-     if($user && in_array(getRoleIdFromSlug(VENDOR_ROLE_SLUG),$user->role_ids)){
-         return true;
-     }
-     return false;
- }
+function isVendorUser()
+{
+    $user = \Auth::user();
+    if ($user && in_array(getRoleIdFromSlug(VENDOR_ROLE_SLUG), $user->role_ids)) {
+        return true;
+    }
+    return false;
+}
 
- function getVendorUser($vendorRequest){
-    $user =  \Impiger\ACL\Models\User::find($vendorRequest->user_id);
+function getVendorUser($vendorRequest)
+{
+    $user = \Impiger\ACL\Models\User::find($vendorRequest->user_id);
 
-        if (!$user) {
-            \Log::info("User id updated in vendors table. But his details not exist.");
-            return $response
-                            ->setError()
-                            ->setMessage("User Profile not exist!");
-        }
-        $user->domain_href = getUserDomainUrl($user->id);
-        $user->temp_password = $vendorRequest->temp_password;
-        //$user->email = (isset($vendorRequest->contact_email) && $vendorRequest->contact_email) ? $vendorRequest->contact_email : $vendorRequest->email_id;
-        $user->contact_email = $vendorRequest->contact_email;
-        return $user;
- }
+    if (!$user) {
+        \Log::info("User id updated in vendors table. But his details not exist.");
+        return $response
+            ->setError()
+            ->setMessage("User Profile not exist!");
+    }
+    $user->domain_href = getUserDomainUrl($user->id);
+    $user->temp_password = $vendorRequest->temp_password;
+    //$user->email = (isset($vendorRequest->contact_email) && $vendorRequest->contact_email) ? $vendorRequest->contact_email : $vendorRequest->email_id;
+    $user->contact_email = $vendorRequest->contact_email;
+    return $user;
+}
 
- function userEmailTemplateVariables(){
-     $variables = [
-         'first_name' => 'First name',
-         'last_name' => 'Last name',
-         'username' => 'Username',
-         'email' => 'Email',
-         'temp_password' => 'Password',
-         'domain_href' => 'Site Url',
-     ];
-     return $variables;
- }
- 
- function getMSMETrainingId($scheme){
-    $trainingId = ""; 
-    if(!$scheme){
+function userEmailTemplateVariables()
+{
+    $variables = [
+        'first_name' => 'First name',
+        'last_name' => 'Last name',
+        'username' => 'Username',
+        'email' => 'Email',
+        'temp_password' => 'Password',
+        'domain_href' => 'Site Url',
+    ];
+    return $variables;
+}
+
+function getMSMETrainingId($scheme)
+{
+    $trainingId = "";
+    if (!$scheme) {
         return $trainingId;
     }
-    $trainingTitle = app(\Impiger\TrainingTitle\Models\TrainingTitle::class)->where('name','LIKE','%'.$scheme.'%')
-                        ->whereDate('training_end_date','>=',date('Y-m-d'))->orderBy('id','DESC')->first();
-    if($trainingTitle){
-        $trainingId=$trainingTitle->id;
+    $trainingTitle = app(\Impiger\TrainingTitle\Models\TrainingTitle::class)->where('name', 'LIKE', '%' . $scheme . '%')
+        ->whereDate('training_end_date', '>=', date('Y-m-d'))->orderBy('id', 'DESC')->first();
+    if ($trainingTitle) {
+        $trainingId = $trainingTitle->id;
     }
     return $trainingId;
- }
- 
- 
- if (!function_exists('get_post_by_category_name')) {
+}
+
+
+if (!function_exists('get_post_by_category_name')) {
     /**
      * @param string $categoryName
      * @param int $paginate
@@ -717,9 +736,9 @@ if (!function_exists('getCurrencyCode')) {
         // dd($posts);
         return $posts;
     }
- }
+}
 
- if (!function_exists('get_post_by_category_our_services')) {
+if (!function_exists('get_post_by_category_our_services')) {
     /**
      * @param int $categoryId
      * @param int $paginate
@@ -732,10 +751,11 @@ if (!function_exists('getCurrencyCode')) {
     {
         $category = strtolower($category);
         $order_by = 'desc';
-        if($category == 'our-services' || $category == 'our services') {
+        if ($category == 'our-services' || $category == 'our services') {
             $order_by = 'asc';
         }
-        $paginate = 12; $limit = 0;
+        $paginate = 12;
+        $limit = 0;
         $categoryData = get_category_by_name('Our Services');
         $data = app(\Impiger\Blog\Models\Post::class)
             ->where('posts.status', \Impiger\Base\Enums\BaseStatusEnum::PUBLISHED)
@@ -755,100 +775,106 @@ if (!function_exists('getCurrencyCode')) {
 
         $our_services_ui_slug = OUR_SERVICES_UI_SLUG;
 
-        if($posts) {
+        if ($posts) {
             foreach ($posts as $post) {
-                if(array_key_exists($post->slugable->key, $our_services_ui_slug)) {
+                if (array_key_exists($post->slugable->key, $our_services_ui_slug)) {
                     // $post->css = (Object) $our_services_ui_slug[$post->slugable->key];
                     $post->css = $our_services_ui_slug[$post->slugable->key];
                 }
             }
-            
+
         }
 
         // dd($posts);
         return $posts;
     }
- }
- if (!function_exists('get_category_by_name')) {
-    function get_category_by_name($name) {
+}
+if (!function_exists('get_category_by_name')) {
+    function get_category_by_name($name)
+    {
         $data = app(\Impiger\Blog\Models\Category::class)
-        ->with('slugable')->where([
-            'categories.name'     => $name,
-            'categories.status' => \Impiger\Base\Enums\BaseStatusEnum::PUBLISHED,
-        ]);
+            ->with('slugable')->where([
+                    'categories.name' => $name,
+                    'categories.status' => \Impiger\Base\Enums\BaseStatusEnum::PUBLISHED,
+                ]);
 
         return app(\Impiger\Blog\Repositories\Interfaces\CategoryInterface::class)->applyBeforeExecuteQuery($data, true)->first();
     }
- }
+}
 
- if (!function_exists('get_training_view')) {
-    function get_training_view($id) {
+if (!function_exists('get_training_view')) {
+    function get_training_view($id)
+    {
         return App\Utils\CrudHelper::trainingview($id);
     }
- }
- 
- if (!function_exists('getExcludeCategoryId')) {
-    function getExcludeCategoryId() {
+}
+
+if (!function_exists('getExcludeCategoryId')) {
+    function getExcludeCategoryId()
+    {
         $categoryIds = [];
-        $slugs = DB::table('slugs')->whereIn('key',EXCLUDE_CATEGORY_SLUGS)->where('reference_type','Impiger\Blog\Models\Category')->get();
-        
-        if($slugs){
+        $slugs = DB::table('slugs')->whereIn('key', EXCLUDE_CATEGORY_SLUGS)->where('reference_type', 'Impiger\Blog\Models\Category')->get();
+
+        if ($slugs) {
             $categoryIds = $slugs->pluck('reference_id');
         }
         return $categoryIds;
     }
- }
- if (!function_exists('getCategoryId')) {
-    function getCategoryId($slug) {
+}
+if (!function_exists('getCategoryId')) {
+    function getCategoryId($slug)
+    {
         $categoryId = [];
-        $slugs = DB::table('slugs')->where('key',$slug)->where('reference_type','Impiger\Blog\Models\Category')->first();
-        
-        if($slugs){
+        $slugs = DB::table('slugs')->where('key', $slug)->where('reference_type', 'Impiger\Blog\Models\Category')->first();
+
+        if ($slugs) {
             $categoryId = $slugs->reference_id;
         }
         return $categoryId;
     }
- }
- 
- if (!function_exists('getMobileNumbers')) {
-    function getMobileNumbers() {
+}
+
+if (!function_exists('getMobileNumbers')) {
+    function getMobileNumbers()
+    {
         $mobileLink = "";
-        $mobileNumbers = explode("/",theme_option('website'));
-        if(is_array($mobileNumbers)){
+        $mobileNumbers = explode("/", theme_option('website'));
+        if (is_array($mobileNumbers)) {
             $count = count($mobileNumbers);
-            foreach($mobileNumbers as $key=> $number){
-                $concatnumber = (strlen($number) == 2) ? substr($mobileNumbers[$key-1], 0, -2) . $number : $number;
-                 $mobileLink.= '<a href="tel:'.$concatnumber.'">'.$number.'</a>';
-                 if($key <($count-1)){
-                     $mobileLink.="/ ";
-                 }
+            foreach ($mobileNumbers as $key => $number) {
+                $concatnumber = (strlen($number) == 2) ? substr($mobileNumbers[$key - 1], 0, -2) . $number : $number;
+                $mobileLink .= '<a href="tel:' . $concatnumber . '">' . $number . '</a>';
+                if ($key < ($count - 1)) {
+                    $mobileLink .= "/ ";
+                }
             }
-        }else{
-            $mobileLink = '<a href="tel:'.$mobileNumbers.'">'.$mobileNumbers.'</a>';
+        } else {
+            $mobileLink = '<a href="tel:' . $mobileNumbers . '">' . $mobileNumbers . '</a>';
         }
         return $mobileLink;
     }
- }
- if (!function_exists('getEmailIds')) {
-    function getEmailIds() {
+}
+if (!function_exists('getEmailIds')) {
+    function getEmailIds()
+    {
         $emailLink = "";
-        $emailIds = explode("|",theme_option('contact_email'));
-        if(is_array($emailIds)){
+        $emailIds = explode("|", theme_option('contact_email'));
+        if (is_array($emailIds)) {
             $count = count($emailIds);
-            foreach($emailIds as $key=> $email){                
-                 $emailLink.= '<a href="mailto:'.$email.'">'.$email.'</a>';
-                 if($key <($count-1)){
-                     $emailLink.="| ";
-                 }
+            foreach ($emailIds as $key => $email) {
+                $emailLink .= '<a href="mailto:' . $email . '">' . $email . '</a>';
+                if ($key < ($count - 1)) {
+                    $emailLink .= "| ";
+                }
             }
-        }else{
-            $emailLink = '<a href="mailto:'.$emailIds.'">'.$emailIds.'</a>';
+        } else {
+            $emailLink = '<a href="mailto:' . $emailIds . '">' . $emailIds . '</a>';
         }
         return $emailLink;
     }
- }
+}
 
-  /* Customized by Ubaidur.Rahman Start */
+/* Customized by Ubaidur.Rahman Start */
 if (!function_exists('get_trainings')) {
     /**
      * @param int $limit
@@ -870,12 +896,12 @@ if (!function_exists('render_trainings')) {
     {
         // Gallery::registerAssets();
         $trainings = get_trainings($limit);
-        return view('training-title.training', compact('trainings','limit'));
+        return view('training-title.training', compact('trainings', 'limit'));
     }
 }
 /* Customized by Ubaidur.Rahman End */
- 
- 
+
+
 
 
 
@@ -904,12 +930,12 @@ if (!function_exists('createHashMapArray')) {
 if (!function_exists('getDistrictCode')) {
     function getDistrictCode($districtId)
     {
-        $code ="";
+        $code = "";
         if (!$districtId) {
             return $code;
         }
-        $district = Impiger\MasterDetail\Models\District::where('id',$districtId)->first();
-        if($district){
+        $district = Impiger\MasterDetail\Models\District::where('id', $districtId)->first();
+        if ($district) {
             $code = $district->code;
         }
         return $code;
@@ -922,10 +948,10 @@ if (!function_exists('getAcronym')) {
         $acronym = "";
 
         foreach ($words as $w) {
-          if(!in_array(strtolower($w),EXCLUDE_ABBREVATION_WORD)){
-              $acronym .= mb_substr($w, 0, 1);
-          }  
-          
+            if (!in_array(strtolower($w), EXCLUDE_ABBREVATION_WORD)) {
+                $acronym .= mb_substr($w, 0, 1);
+            }
+
         }
         return $acronym;
     }
@@ -933,11 +959,11 @@ if (!function_exists('getAcronym')) {
 if (!function_exists('getCandidateId')) {
     function getCandidateId($userId)
     {
-       $candidateId = null;
-       $candidate = Impiger\Entrepreneur\Models\Entrepreneur::where('user_id',$userId)->first();
-       if($candidate){
-           $candidateId = $candidate->id;
-       }
+        $candidateId = null;
+        $candidate = Impiger\Entrepreneur\Models\Entrepreneur::where('user_id', $userId)->first();
+        if ($candidate) {
+            $candidateId = $candidate->id;
+        }
         return $candidateId;
     }
 }
@@ -946,8 +972,8 @@ if (!function_exists('getMsmeCandidate')) {
     function getMsmeCandidate($userId)
     {
         $isMsmeCandidate = false;
-        $candidate = Impiger\Entrepreneur\Models\Entrepreneur::where('user_id',$userId)->first();
-        if($candidate){
+        $candidate = Impiger\Entrepreneur\Models\Entrepreneur::where('user_id', $userId)->first();
+        if ($candidate) {
             $isMsmeCandidate = ($candidate->scheme) ? true : false;
             $candidate['msmeScheme'] = $candidate->scheme;
         }
@@ -965,28 +991,28 @@ if (!function_exists('getRequestClass')) {
      */
     function getRequestClass(string $model)
     {
-        $str="";
-        if(!$model){
+        $str = "";
+        if (!$model) {
             return $str;
         }
         $modelObj = new $model;
         $table = $modelObj->getTable();
         $parentModule = null;
-        $cruds = Impiger\Crud\Models\Crud::where('module_db',$table)->first();
+        $cruds = Impiger\Crud\Models\Crud::where('module_db', $table)->first();
         $module = ($cruds) ? $cruds->module_name : "";
-        if($cruds && $cruds->parent_id){
-            $parentModule = Impiger\Crud\Models\Crud::where('id',$cruds->parent_id)->first();
-            $module= ($parentModule) ? $parentModule->module_name : "";
+        if ($cruds && $cruds->parent_id) {
+            $parentModule = Impiger\Crud\Models\Crud::where('id', $cruds->parent_id)->first();
+            $module = ($parentModule) ? $parentModule->module_name : "";
         }
-        if($module){
+        if ($module) {
             $str = '\Impiger\{Module}\Http\Requests\{Name}Request';
             $search = array('{Module}', '{Name}');
             $replace = array(ucfirst(Str::camel($module)), ucfirst(Str::camel($cruds->module_name)));
             $str = str_replace($search, $replace, $str);
-        }else{
+        } else {
             $str = str_replace('Models', 'Http\Requests', $model);
-            $str.='Request';
-        }       
+            $str .= 'Request';
+        }
         return $str;
     }
 }

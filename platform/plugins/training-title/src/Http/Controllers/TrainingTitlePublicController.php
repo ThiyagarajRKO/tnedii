@@ -50,19 +50,19 @@ class TrainingTitlePublicController extends Controller
         try {
             $trainingTitle = $this->trainingTitleRepository->getModel();
             $table = $trainingTitle->getTable();
-            if(Schema::hasColumn($table,'is_enabled')){
-                $trainingTitle->fillable(array_merge($trainingTitle->getFillable(),["is_enabled"]));
+            if (Schema::hasColumn($table, 'is_enabled')) {
+                $trainingTitle->fillable(array_merge($trainingTitle->getFillable(), ["is_enabled"]));
                 $trainingTitle->is_enabled = 0;
             }
             $trainingTitle->fill($request->input());
             $this->trainingTitleRepository->createOrUpdate($trainingTitle);
-            
+
             CrudHelper::uploadFiles($request, $trainingTitle);
             event(new CreatedContentEvent(TRAINING_TITLE_MODULE_SCREEN_NAME, $request, $trainingTitle));
-            
+
             return $response
-                    ->setPreviousUrl(url('/form-response?form=training title'))
-                    ->setMessage(trans('core/base::notices.create_success_message'));
+                ->setPreviousUrl(url('/form-response?form=training title'))
+                ->setMessage(trans('core/base::notices.create_success_message'));
         } catch (Exception $exception) {
             info($exception->getMessage());
             return $response
@@ -81,14 +81,14 @@ class TrainingTitlePublicController extends Controller
     {
         try {
             $trainingTitle = $this->trainingTitleRepository->findOrFail($id);
-            
+
             $trainingTitle->fill($request->input());
             $this->trainingTitleRepository->createOrUpdate($trainingTitle);
             event(new UpdatedContentEvent(TRAINING_TITLE_MODULE_SCREEN_NAME, $request, $trainingTitle));
-            
+
             return $response
-                    ->setPreviousUrl(url('/form-response?form=training title'))
-                    ->setMessage(trans('core/base::notices.create_success_message'));
+                ->setPreviousUrl(url('/form-response?form=training title'))
+                ->setMessage(trans('core/base::notices.create_success_message'));
         } catch (Exception $exception) {
             info($exception->getMessage());
             return $response
@@ -96,7 +96,7 @@ class TrainingTitlePublicController extends Controller
                 ->setMessage(trans('plugins/trainingTitle::failed_msg'));
         }
     }
-    
+
     public function trainingTitleData(Request $request, BaseHttpResponse $response)
     {
         try {
@@ -106,7 +106,7 @@ class TrainingTitlePublicController extends Controller
             $columnIndex = isset($input_data['order']) && isset($input_data['order'][0]) && isset($input_data['order'][0]['column']) ? $input_data['order'][0]['column'] : ""; // Column index
             $columnName = $columnIndex !== "" && isset($input_data['columns']) && isset($input_data['columns'][$columnIndex]) && isset($input_data['columns'][$columnIndex]['data']) ? $input_data['columns'][$columnIndex]['data'] : "created_at"; // Column name
             $columnSortOrder = isset($input_data['order']) && isset($input_data['order'][0]) && isset($input_data['order'][0]['dir']) ? $input_data['order'][0]['dir'] : "DESC"; // asc or desc
-            
+
             $selected_year = (isset($input_data['selected_year']) && $input_data['selected_year'] != "" ? $input_data['selected_year'] : date("Y"));
             $selected_month = (isset($input_data['selected_month']) && $input_data['selected_month'] != "" ? $input_data['selected_month'] : date("m"));
             $selected_month_year = $selected_year . "-" . $selected_month;
@@ -130,36 +130,88 @@ class TrainingTitlePublicController extends Controller
                 \DB::Raw("DATE_FORMAT(`training_title`.`training_start_date`, '%b') AS month"),
                 \DB::Raw("DATE_FORMAT(`training_title`.`training_start_date`, '%d') AS day"),
                 \DB::Raw("DATE_FORMAT(`training_title`.`training_start_date`, '%Y') AS year")
-            ])       
-            ->leftJoin('annual_action_plan', 'annual_action_plan.id', '=', 'training_title.annual_action_plan_id')
-            ->where('training_title.training_start_date', 'LIKE', $selected_month_year . "%");
+            ])
+                ->leftJoin('annual_action_plan', 'annual_action_plan.id', '=', 'training_title.annual_action_plan_id')
+                ->where('training_title.training_start_date', 'LIKE', $selected_month_year . "%");
 
             $total_count = $data->count();
             $data = $data
                 ->orderBy($columnName, $columnSortOrder)
                 ->limit($limit)
                 ->offset($page);
-                
+
             $displaying_record_count = $data->count();
-            
+
             $data = $data->get();
-            
+
             $return_data = [
-				"draw" => isset($input_data['draw']) && $input_data['draw'] != "" ? $input_data['draw'] : 1,
-				"recordsTotal" => $total_count,
-				"recordsFiltered" => $total_count,
-				"data" => $data,
-			];
-			return response()->json($return_data);
-            
-            
+                "draw" => isset($input_data['draw']) && $input_data['draw'] != "" ? $input_data['draw'] : 1,
+                "recordsTotal" => $total_count,
+                "recordsFiltered" => $total_count,
+                "data" => $data,
+            ];
+            return response()->json($return_data);
+
+
         } catch (Exception $exception) {
             info($exception->getMessage());
             $return_data = [
                 'code' => 400,
                 'message' => $exception->getMessage(),
             ];
-			return response()->json($return_data);
+            return response()->json($return_data);
+        }
+    }
+
+    public function getTrainingTitles(Request $request, BaseHttpResponse $response)
+    {
+        try {
+            $input_data = $request->input();
+            $limit = isset($input_data['length']) && $input_data['length'] != "" ? $input_data['length'] : 25; // Rows display per page
+            $page = isset($input_data['start']) && $input_data['start'] != "" ? $input_data['start'] : 0;
+            $search = $input_data['search'] ?? '';
+
+            // Query
+            $data = $this->trainingTitleRepository->getModel()->select([
+                'training_title.id',
+                'training_title.name',
+                'training_title.code',
+            ])
+                ->leftJoin('annual_action_plan', 'annual_action_plan.id', '=', 'training_title.annual_action_plan_id')
+                ->join('financial_year', function ($join) {
+                    $join->on('financial_year.id', '=', 'training_title.financial_year_id')
+                        ->where('financial_year.is_running', '=', '1')
+                        ->where('financial_year.is_enabled', '=', '1');
+                })
+                ->when($search, function ($query) use ($search) {
+                    return $query->where('training_title.name', 'LIKE', "%{$search}%");
+                });
+
+            // Getting count
+            $total_count = $data->count();
+
+            // Pagination
+            $data = $data
+                ->orderBy("training_title.created_at", "desc")
+                ->limit($limit)
+                ->offset($page);
+
+            // Getting Rows
+            $data = $data->get();
+
+            $return_data = [
+                "count" => $total_count,
+                "rows" => $data,
+            ];
+            return response()->json($return_data);
+
+
+        } catch (Exception $exception) {
+            $return_data = [
+                'code' => 400,
+                'message' => $exception->getMessage(),
+            ];
+            return response()->json($return_data);
         }
     }
 }

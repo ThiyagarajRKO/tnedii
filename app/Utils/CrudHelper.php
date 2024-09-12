@@ -24,8 +24,70 @@ use Hash;
 use Illuminate\Support\Facades\Response as FacadeResponse;
 use Impiger\TrainingTitle\Repositories\Interfaces\TrainingTitleInterface;
 
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+//use PHPMailer\PHPMailer\Exception;
+
+//require 'vendor/autoload.php';
+
+require '/home/u602093072/domains/betaon.in/public_html/tnedii/PHPMailer/src/Exception.php';
+require '/home/u602093072/domains/betaon.in/public_html/tnedii/PHPMailer/src/PHPMailer.php';
+require '/home/u602093072/domains/betaon.in/public_html/tnedii/PHPMailer/src/SMTP.php';
+
 class CrudHelper
 {
+
+
+    public static function sendEmail($messageContent, $emailSubject, $emailId, $args)
+    {
+
+        $mail = new PHPMailer(true);
+
+
+        try {
+            //Server settings
+            $mail->SMTPDebug = SMTP::DEBUG_OFF;                      //Enable verbose debug output
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host = env('MAIL_HOST');                     //Set the SMTP server to send through
+            $mail->SMTPAuth = true;                                   //Enable SMTP authentication
+            $mail->Username = env('MAIL_USERNAME');                        //SMTP username
+            $mail->Password = env('MAIL_PASSWORD');                        //SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
+            $mail->Port = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+            //Recipients
+            $mail->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+            $mail->addAddress($emailId);
+
+            //Attachments
+            if (!empty($args['attachments']) && file_exists($args['attachments'])) {
+                $mail->addAttachment($args['attachments']); // Add attachments if they exist
+            }    //Add attachments
+
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = $emailSubject;
+            $mail->Body = $messageContent;
+
+            $mail->send();
+            return ['status' => 'success', 'message' => 'Message has been sent'];
+        } catch (Exception $e) {
+            // Log the error message
+            $errorMessage = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}\n";
+            $errorMessage .= "Exception Message: {$e->getMessage()}\n";
+            $errorMessage .= "Date/Time: " . date('Y-m-d H:i:s') . "\n";
+
+            // Define the log file path in the current script's directory
+            $logFile = __DIR__ . '/logfile.log'; // This will create logfile.log in the same directory as the script
+
+            // Append the log entry to the file
+            file_put_contents($logFile, $errorMessage, FILE_APPEND);
+
+            // Optionally, you can still print the error message
+            return ['status' => 'error', 'message' => 'Message could not be sent. Please try again later.'];
+        }
+    }
 
     public static function getModuleNameUsingModuleDBField($tableName)
     {
@@ -1497,40 +1559,8 @@ class CrudHelper
             $replaceContent = self::getReplaceContent($emailMessage, $data, $userName);
             $messageContent = ($replaceContent) ?: $emailMessage;
             $args['attachments'] = (isset($data->attachments) && $data->attachments) ? url('/storage/') . '/' . $data->attachments : "";
-            sendEmail($messageContent, $emailSubject, $emailId, $args);
-        }
-    }
-
-    public function sendEmail($messageContent, $emailSubject, $emailId, $args)
-    {
-        try {
-            //Server settings
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-            $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host = 'smtp.example.com';                     //Set the SMTP server to send through
-            $mail->SMTPAuth = true;                                   //Enable SMTP authentication
-            $mail->Username = env('MAIL_USERNAME')              //SMTP username
-            $mail->Password = env('MAIL_PASSWORD')                         //SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-            $mail->Port = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-            //Recipients
-            $mail->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
-            $mail->addAddress($emailId);
-
-            //Attachments
-            $mail->addAttachment($args['attachment']);         //Add attachments
-
-            //Content
-            $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Here is the subject';
-            $mail->Body = 'This is the HTML message body <b>in bold!</b>';
-            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-            $mail->send();
-            echo 'Message has been sent';
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            //\EmailHandler::send($messageContent, $emailSubject, $emailId,$args);
+            self::sendEmail($messageContent, $emailSubject, $emailId, $args);
         }
     }
 
@@ -4052,6 +4082,52 @@ JOIN `mentees` `ME` ON `ME`.`entrepreneur_id` = `EE`.`id`)) AS `cnt`");
             return $entrepreneurModel->select($fields)->where($whereKey, $keyVal)->get()->toArray();
         }
 
+    }
+
+    function getDistricts(Request $request)
+    {
+        try {
+            $input_data = $request->input();
+            $limit = isset($input_data['length']) && $input_data['length'] != "" ? $input_data['length'] : 25; // Rows display per page
+            $page = isset($input_data['start']) && $input_data['start'] != "" ? $input_data['start'] : 0;
+            $search = $input_data['search'] ?? '';
+            $district_model = app(\Impiger\MasterDetail\Models\District::class)->getModel();
+
+            // Query
+            $data = $district_model::select([
+                'id',
+                'name',
+                'code',
+            ])->when($search, function ($query) use ($search) {
+                return $query->where('name', 'LIKE', "%{$search}%");
+            })->groupBy('name');
+
+            // Getting count
+            $total_count = $data->count();
+
+            // Pagination
+            $data = $data
+                ->orderBy("name", "asc")
+                ->limit($limit)
+                ->offset($page);
+
+            // Getting Rows
+            $data = $data->get();
+
+            $return_data = [
+                "count" => $total_count,
+                "rows" => $data,
+            ];
+            return response()->json($return_data);
+
+
+        } catch (Exception $exception) {
+            $return_data = [
+                'code' => 400,
+                'message' => $exception->getMessage(),
+            ];
+            return response()->json($return_data);
+        }
     }
 }
 
