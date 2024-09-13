@@ -8,7 +8,7 @@ CREATE TABLE training_applicants (
     care_of VARCHAR(255),
     father_mother_husband_name VARCHAR(255),
     gender VARCHAR(255),
-    date_of_birth DATE,
+    date_of_birth VARCHAR(10),
     aadhaar_no VARCHAR(20),
     physically_challenged ENUM('Yes', 'No'),
     community VARCHAR(255),
