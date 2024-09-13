@@ -15,16 +15,22 @@
                             @include('core/base::layouts.partials.sidebar-search')
                             <ul class="page-sidebar-menu page-header-fixed page-sidebar-menu-closed" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                                 {{-- @Customized Ramesh Esakki - Start --}}
-                                    @if(!is_plugin_active('backend-menu') || (auth() && auth()->user() && auth()->user()->manage_supers) )
+                                    @if(!is_plugin_active('backend-menu') || (auth() && auth()->user() && auth()->user()->manage_supers))
                                         @include('core/base::layouts.partials.sidebar')
                                     @else
                                         {!!
-                                        app(\Impiger\BackendMenu\BackendMenu::class)->renderDynamicMenus([
-                                            'view' => 'plugins/backend-menu::partials.dynamic-sidebar'
-                                        ])
+        app(\Impiger\BackendMenu\BackendMenu::class)->renderDynamicMenus([
+            'view' => 'plugins/backend-menu::partials.dynamic-sidebar'
+        ])
                                         !!}
                                     @endif
                                 {{-- @Customized Ramesh Esakki - End --}}
+                                <li class="nav-item">
+                                    <a href="{{ url('/training/applicants') }}" class="nav-link nav-toggle">
+                                        <i class="fa fa-users"></i>
+                                        <span class="title">Training Applicants</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
