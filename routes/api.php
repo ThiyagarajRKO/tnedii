@@ -18,9 +18,10 @@ Route::post('/ivp/register', [\Impiger\User\Http\Controllers\UserPublicControlle
 Route::get('/training/title', [\Impiger\TrainingTitle\Http\Controllers\TrainingTitlePublicController::class, 'getTrainingTitles'])
     ->name('public.training-title.trainingTitleData');
 
+Route::get('/district', [\App\Utils\CrudHelper::class, 'getDistricts'])->name('get_districts');
 
-Route::get('/district', [\App\Utils\CrudHelper::class, 'getDistricts']);
+Route::get('/training/applicants', [\App\Http\Controllers\TrainingController::class, 'getTrainingApplicants'])->name('get_training_applicants');
 
-Route::get('/traning/applicants', [\App\Http\Controllers\TrainingController::class, 'getTrainingApplicants'])->name('get_training_applicants');
+Route::get('/training/applicants/download', [\App\Http\Controllers\TrainingController::class, 'downloadApplicants'])->name('download_training_applicants');
 
-Route::post('/traning/applicants', [\App\Http\Controllers\TrainingController::class, 'addTrainingApplicant'])->name('add_training_applicant');
+Route::post('/training/applicants', [\App\Http\Controllers\TrainingController::class, 'addTrainingApplicant'])->name('add_training_applicant');

@@ -127,4 +127,43 @@ class TrainingController extends Controller
         }
     }
 
+    public function downloadApplicants(Request $request)
+    {
+        try {
+            $query = DB::table('training_applicants')
+                ->select(
+                    DB::raw('training_type as `Training Type`'),
+                    DB::raw('candidate_type as `Candidate Type`'),
+                    DB::raw('name as `Name`'),
+                    DB::raw('email as `Email`'),
+                    DB::raw('prefix as `Prefix`'),
+                    DB::raw('care_of as `Care Of`'),
+                    DB::raw('father_mother_husband_name as `Father/Mother/Husband Name`'),
+                    DB::raw('gender as `Gender`'),
+                    DB::raw('date_of_birth as `Date of Birth`'),
+                    DB::raw('aadhaar_no as `Aadhaar No`'),
+                    DB::raw('physically_challenged as `Physically Challenged`'),
+                    DB::raw('community as `Community`'),
+                    DB::raw('qualification as `Qualification`'),
+                    DB::raw('address as `Address`'),
+                    DB::raw('district as `District`'),
+                    DB::raw('pincode as `Pincode`'),
+                    DB::raw('contact_no as `Contact No`')
+                );
+
+            $count = $query->count();
+
+            $rows = $query->get();
+
+
+            return response()->json(compact('count', 'rows'));
+
+        } catch (Exception $exception) {
+            return response()->json([
+                'success' => false,
+                'message' => $exception->getMessage(),
+            ], 400); // 500 Internal Server Error
+        }
+    }
+
 }
