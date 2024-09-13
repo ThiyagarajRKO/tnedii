@@ -135,80 +135,11 @@
    $(document).on('click', '#download', (e) => {
       e.preventDefault();
       $.ajax({
-         url: "{{route('get_training_applicants')}}",
+         url: "{{route('download_training_applicants')}}",
          method: 'GET',
          success: function ({ rows }) {
-
-            // Step 1: Define custom headers
-            var headers = [
-               'Training Type',
-               'Candidate Type',
-               'Name',
-               'Email',
-               'Prefix',
-               'Care Of',
-               'Father/Mother/Husband Name',
-               'Gender',
-               'Date of Birth',
-               'Aadhaar No',
-               'Physically Challenged',
-               'Community',
-               'Qualification',
-               'Address',
-               'District',
-               'Pincode',
-               'Contact No',
-               'Photo'
-            ];
-
-            // Step 2: Map the JSON data to the custom headers
-            var data = rows.map(function (item) {
-               return {
-                  'Training Type': item.training_type,
-                  'Candidate Type': item.candidate_type,
-                  'Name': item.name,
-                  'Email': item.email,
-                  'Prefix': item.prefix,
-                  'Care Of': item.care_of,
-                  'Father/Mother/Husband Name': item.father_mother_husband_name,
-                  'Gender': item.gender,
-                  'Date of Birth': item.date_of_birth,
-                  'Aadhaar No': item.aadhaar_no,
-                  'Physically Challenged': item.physically_challenged,
-                  'Community': item.community,
-                  'Qualification': item.qualification,
-                  'Address': item.address,
-                  'District': item.district,
-                  'Pincode': item.pincode,
-                  'Contact No': item.contact_no,
-                  'Photo': item.photo
-               };
-            });
-
-            // Step 3: Add headers to the data
-            data.unshift({
-               'Training Type': headers[0],
-               'Candidate Type': headers[1],
-               'Name': headers[2],
-               'Email': headers[3],
-               'Prefix': headers[4],
-               'Care Of': headers[5],
-               'Father/Mother/Husband Name': headers[6],
-               'Gender': headers[7],
-               'Date of Birth': headers[8],
-               'Aadhaar No': headers[9],
-               'Physically Challenged': headers[10],
-               'Community': headers[11],
-               'Qualification': headers[12],
-               'Address': headers[13],
-               'District': headers[14],
-               'Pincode': headers[15],
-               'Contact No': headers[16],
-               'Photo': headers[17]
-            });
-
             // Step 4: Convert the custom data to a worksheet
-            var worksheet = XLSX.utils.json_to_sheet(data, { skipHeader: true });
+            var worksheet = XLSX.utils.json_to_sheet(rows);
 
             // Create a new workbook
             var workbook = XLSX.utils.book_new();
