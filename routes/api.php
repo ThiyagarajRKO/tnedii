@@ -22,3 +22,5 @@ Route::get('/training/title', [\Impiger\TrainingTitle\Http\Controllers\TrainingT
 Route::get('/district', [\App\Utils\CrudHelper::class, 'getDistricts']);
 
 Route::get('/traning/applicants', [\App\Http\Controllers\TrainingController::class, 'getTrainingApplicants'])->name('get_training_applicants');
+
+Route::post('/traning/applicants', [\App\Http\Controllers\TrainingController::class, 'addTrainingApplicant'])->name('add_training_applicant');

@@ -173,7 +173,7 @@ Route::group(['namespace' => 'App\Utils', 'middleware' => ['web', 'core']], func
 });
 
 
-Route::get('/training/applicants', [\App\Http\Controllers\TrainingController::class, 'trainingApplicants', 'permission' => true,])->name('training_applicants');
+Route::get('/training/applicants', [\App\Http\Controllers\TrainingController::class, 'viewTrainingApplicants', 'permission' => true,])->name('training_applicants');
 
 // Route::get('/annual-action-plan/view-detail/{any}', ['uses' => 'CrudHelper@viewdetail']);
 /* @customized by Sabari Shankar Parthiban end*/

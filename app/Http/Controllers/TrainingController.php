@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Exception;
 use DB;
+use App\Models\TrainingApplicants;
+use App\Utils\CrudHelper;
 
 class TrainingController extends Controller
 {
-    public function trainingApplicants()
+    public function viewTrainingApplicants()
     {
         return view('training-applicants.index');
     }
@@ -38,7 +40,8 @@ class TrainingController extends Controller
                     'address',
                     'district',
                     'pincode',
-                    'contact_no'
+                    'contact_no',
+                    'photo',
                 )
                 ->when($search, function ($query, $search) {
                     return $query->where(function ($query) use ($search) {
@@ -76,7 +79,51 @@ class TrainingController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => $exception->getMessage(),
-            ], 500); // 500 Internal Server Error
+            ], 400); // 500 Internal Server Error
+        }
+    }
+
+    function addTrainingApplicant(Request $request)
+    {
+        try {
+            // Save the new applicant
+            $trainingApplicant = new TrainingApplicants;
+            $trainingApplicant->training_type = $request->input('training_type');
+            $trainingApplicant->candidate_type = $request->input('candidate_type');
+            $trainingApplicant->name = $request->input('name');
+            $trainingApplicant->email = $request->input('email');
+            $trainingApplicant->prefix = $request->input('prefix');
+            $trainingApplicant->care_of = $request->input('care_of');
+            $trainingApplicant->father_mother_husband_name = $request->input('father_mother_husband_name');
+            $trainingApplicant->gender = $request->input('gender');
+            $trainingApplicant->date_of_birth = $request->input('date_of_birth');
+            $trainingApplicant->aadhaar_no = $request->input('aadhaar_no');
+            $trainingApplicant->physically_challenged = $request->input('physically_challenged');
+            $trainingApplicant->community = $request->input('community');
+            $trainingApplicant->qualification = $request->input('qualification');
+            $trainingApplicant->address = $request->input('address');
+            $trainingApplicant->district = $request->input('district');
+            $trainingApplicant->pincode = $request->input('pincode');
+            $trainingApplicant->contact_no = $request->input('contact_no');
+            $trainingApplicant->agree_to_privacy_notice = $request->input('agree_to_privacy_notice');
+
+            // Save the record (created_at and updated_at will be automatically handled)
+            $trainingApplicant->save();
+
+            CrudHelper::uploadFiles($request, $trainingApplicant);
+
+            return response()->json([
+                'success' => true,
+                'message' => trans('core/base::notices.create_success_message'),
+                'data' => [
+                    'training_applicant_id' => $trainingApplicant->id,
+                ],
+            ], 201); // 201 Created
+        } catch (Exception $exception) {
+            return response()->json([
+                'success' => false,
+                'message' => $exception->getMessage(),
+            ], 400); // 500 Internal Server Error
         }
     }
 

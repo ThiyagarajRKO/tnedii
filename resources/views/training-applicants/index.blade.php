@@ -120,7 +120,8 @@
                   <table id="training_applicants" class="table display table-hover nowrap w-100">
                      <thead class="w-auto">
                         <tr>
-                           <!--<th>Photo</th>-->
+                           <th>#</th>
+                           <th>Photo</th>
                            <th>Training Type</th>
                            <th>Canditate Type</th>
                            <th>Name</th>
@@ -151,14 +152,11 @@
 
 @section('script')
 
-<!--jQuery-->
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script> 
-
 <!-- MDB -->
 <script src="{{url("plugins/MDB5-7.2.0/js/mdb.es.min.js?v=2")}}"></script>
 
 <!-- Bootstrap -->
- <!--<script src="{{url("plugins/bootstrap/js/bootstrap.min.js?v=2")}}"></script> -->
+<!--<script src="{{url("plugins/bootstrap/js/bootstrap.min.js?v=2")}}"></script> -->
 
 <!-- Datatables -->
 <script src="{{url("plugins/dataTables/datatables.min.js?v=2")}}"></script>
@@ -169,50 +167,80 @@
 
 
 <script>
-      $("#training_applicants").DataTable({
-         destroy: true,
-         responsive: false,
-         processing: true,
-         serverSide: true,
-         scrollX: true,
-         scrollCollapse: true,
-         scrollY: "60vh",
-         ordering: false,
-         language: {
-            searchPlaceholder: 'Global Search'
+   $("#training_applicants").DataTable({
+      destroy: true,
+      responsive: false,
+      processing: true,
+      serverSide: true,
+      scrollX: true,
+      scrollCollapse: true,
+      scrollY: "60vh",
+      ordering: false,
+      language: {
+         searchPlaceholder: 'Global Search'
+      },
+      ajax: {
+         type: "GET",
+         url: "{{route('get_training_applicants')}}",
+         error: function (xhr) {
+            $("#allotments").DataTable().destroy();
+            $("#allotments").DataTable({ scrollX: true, ordering: false });
          },
-         ajax: {
-            type: "GET",
-            url: "{{route('get_districts')}}",
-            error: function (xhr) {
-               $("#allotments").DataTable().destroy();
-               $("#allotments").DataTable({ scrollX: true, ordering: false });
-            },
-            dataSrc: function (data) {
-               data.iTotalRecords = data?.rows?.length || 0;
-               data.iTotalDisplayRecords = data.count || 0;
-               return data?.rows || [];
+         dataSrc: function (data) {
+            data.iTotalRecords = data?.rows?.length || 0;
+            data.iTotalDisplayRecords = data.count || 0;
+            return data?.rows || [];
+         }
+      },
+      columns: [
+         {
+            "data": null,
+            "defaultContent": "",
+            "render": function (data, type, row, meta) {
+               return meta.row + 1;
             }
          },
-         columns: [
-            { data: "training_type" },
-            { data: "candidate_type" },
-            { data: "name" },
-            { data: "email" },
-            { data: "prefix" },
-            { data: "care_of" },
-            { data: "father_mother_husband_name" },
-            { data: "gender" },
-            { data: "date_of_birth" },
-            { data: "aadhaar_no" },
-            { data: "physically_challenged" },
-            { data: "community" },
-            { data: "qualification" },
-            { data: "address" },
-            { data: "district" },
-            { data: "pincode" },
-            { data: "contact_no" },
-         ],
-      });
+         {
+            "data": null,
+            "defaultContent": "",
+            "render": function (data, type, row, meta) {
+               // Construct the image URL, falling back to a default if needed
+               const photoUrl = data?.photo
+                  ? `{{ asset('/storage/') }}/${data.photo}`
+                  : "{{ asset('images/no-image.png') }}";
+
+
+               // Determine whether the image is the default "no image" placeholder
+               const isNoImage = !data?.photo;
+
+               // Create the image element
+               const imageHtml = `<img src="${photoUrl}" alt="User Photo"/>`;
+
+               // Return the anchor element conditionally
+               return isNoImage
+                  ? imageHtml
+                  : `<a href="${photoUrl}" target="_blank" aria-label="View User Photo">${imageHtml}</a>`;
+            }
+         },
+         { data: "training_type" },
+         { data: "candidate_type" },
+         { data: "name" },
+         { data: "email" },
+         { data: "prefix" },
+         { data: "care_of" },
+         { data: "father_mother_husband_name" },
+         { data: "gender" },
+         { data: "date_of_birth" },
+         { data: "aadhaar_no" },
+         { data: "physically_challenged" },
+         { data: "community" },
+         { data: "qualification" },
+         { data: "address" },
+         { data: "district" },
+         { data: "pincode" },
+         { data: "contact_no" },
+      ],
+
+   });
 </script>
 @endsection

@@ -5,14 +5,12 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title> NEET PG Counselling Services | NEET UG Counselling Services - MatDoc </title>
-    <meta name="keywords"
-        content="neet pg counselling 2024, neet pg counselling 2024 schedule, all india neet pg counselling 2024, neet pg counselling 2024 dates,neet pg counselling 2024 registration,neet pg counselling 2024 latest news,neet pg counselling 2024 result ">
-    <meta name="description"
-        content="neet pg counselling 2024, best neet pg colleges maharashtra neet pg counselling 2024, bihar neet pg counselling 2024, haryana neet pg counselling 2024,tamil nadu neet pg counselling 2024,karnataka neet pg counselling 2024,mp neet pg counselling 2024,rajasthan neet pg counselling 2024,up neet pg counselling 2024,assam neet pg counselling 2024,karnatka neet pg counselling 2024">
+    <title> TNEDII </title>
+    <meta name="keywords" content="TNEDII">
+    <meta name="description" content="TNEDII">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('front_css/assets/images/favicon.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('storage/mask-group-1.png')}}">
     <!-- Icon Font CSS -->
     <link rel="stylesheet" href="{{asset('front_css/assets/css/plugins/font-awesome.min.css')}}">
     <!-- <link rel="stylesheet" href="{{url("plugins/font-awesome/css/all.min.css?v=2")}}" /> -->
@@ -42,7 +40,7 @@
     <script src="{{asset('front_css/assets/js/plugins/jquery.powertip.min.js')}}"></script>
     <script src="{{asset('front_css/assets/js/plugins/glightbox.min.js')}}"></script>
     <!-- Main JS -->
-    <!-- <script src="{{asset('front_css/assets/js/main.js')}}"></script> -->
+    <!--<script src="{{asset('front_css/assets/js/main.js')}}"></script>-->
 
 
     <style>
@@ -105,15 +103,7 @@
 </head>
 
 <body>
-    <div class="main-wrapper">
-        <!-- Preloader Start  -->
-        <div class="preloader">
-            <div class="loader"></div>
-        </div>
-
-        @yield('content')
-
-    </div>
+    @yield('content')
 </body>
 
 @yield('script')
