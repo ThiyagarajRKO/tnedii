@@ -4129,6 +4129,51 @@ JOIN `mentees` `ME` ON `ME`.`entrepreneur_id` = `EE`.`id`)) AS `cnt`");
             return response()->json($return_data);
         }
     }
+
+    function getTrainingApplicants(Request $request)
+    {
+        try {
+            $input_data = $request->input();
+            $limit = isset($input_data['length']) && $input_data['length'] != "" ? $input_data['length'] : 25; // Rows display per page
+            $page = isset($input_data['start']) && $input_data['start'] != "" ? $input_data['start'] : 0;
+            $search = $input_data['search'] ?? '';
+
+            // Query
+            $data = \DB::select([
+                'id',
+                'name',
+                'code',
+            ])->when($search, function ($query) use ($search) {
+                return $query->where('name', 'LIKE', "%{$search}%");
+            })->groupBy('name');
+
+            // Getting count
+            $total_count = $data->count();
+
+            // Pagination
+            $data = $data
+                ->orderBy("name", "asc")
+                ->limit($limit)
+                ->offset($page);
+
+            // Getting Rows
+            $data = $data->get();
+
+            $return_data = [
+                "count" => $total_count,
+                "rows" => $data,
+            ];
+            return response()->json($return_data);
+
+
+        } catch (Exception $exception) {
+            $return_data = [
+                'code' => 400,
+                'message' => $exception->getMessage(),
+            ];
+            return response()->json($return_data);
+        }
+    }
 }
 
 
